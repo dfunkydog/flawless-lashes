@@ -19,17 +19,21 @@
 <div id="header">
 	<div class="branding"><a class="blogname" href="<?php echo home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" alt=""></a>
 		<div id="menutoggle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/menutoggle.png" width="24px" height="24px" alt=""></div>
-		<h2>This is a test should show on shop only</h2>
+
 	</div>
 	<nav>
 		<ul id="atme">
 			<li class="twitter"><a href="http://twitter.com/FlawlessLLashes"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" alt="">twitter</a></li>
 			<li class="facebook"><a href="http://facebook.com/lashacademybeautique"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" alt="">facebook</a></li>
 			<li class="phone"><a href="tel"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/phone.png" alt="">07704405960</a></li>
-			<li class="email"><a href="mailto:info@eueyelashinstitute.com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/mail.png" alt="">info@eueyelashinstitute.com</a></li>
+			<li><?php global $woocommerce; ?>
+ <a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a></li>
 		</ul>
 		<?php wp_nav_menu( array( 'theme_location' => 'primary-2', 'container' => false ) ); ?>
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false ) ); ?>
 	</nav>
 </div>
 <div id="main">
+
+
+

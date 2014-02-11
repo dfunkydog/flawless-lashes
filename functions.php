@@ -73,10 +73,7 @@
 
 		wp_register_script( 'plugins', get_template_directory_uri().'/js/plugins.js', array( 'jquery' ), '', true );
 		wp_enqueue_script( 'plugins' );
-        if(is_front_page() ){
-        wp_register_script( 'super', get_template_directory_uri().'/js/supersized.min.js', array( 'jquery' ), '', true );
-		wp_enqueue_script( 'super' );
-        }
+
 		wp_register_script( 'site', get_template_directory_uri().'/js/site.js', array( 'jquery' ), '', true );
 		wp_enqueue_script( 'site' );
 
@@ -163,4 +160,16 @@ function jk_change_breadcrumb_delimiter( $defaults ) {
 // Change the breadcrumb delimeter from '/' to '>'
 $defaults['delimiter'] = ' &raquo; ';
 return $defaults;
+}
+
+add_filter('add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
+
+function woocommerce_header_add_to_cart_fragment( $fragments ) {
+global $woocommerce;
+ob_start();
+?>
+<a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a>
+<?php
+$fragments['a.cart-contents'] = ob_get_clean();
+return $fragments;
 }

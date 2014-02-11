@@ -27,41 +27,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	//supersized stuff
-	if ($(".home").length > 0) {
-		console.log("its home");
-		$.supersized({
-
-			// Functionality
-			fit_portrait: 0,
-			slide_interval: 4000, // Length between transitions
-			transition: 3, // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
-			transition_speed: 700, // Speed of transition
-			vertical_center: 0, // display image from top
-			// Components
-			slide_links: 'false', // Individual links for each slide (Options: false, 'num', 'name', 'blank')
-			slides: [ // Slideshow Images
-				{
-					image: 'http://eueyelashinstitute.com/wp-content/uploads/2014/01/eyestk.jpg',
-					title: '<p>Gorgeous lashes that give you stunning eyes.</p>'
-				}, {
-					image: 'http://eueyelashinstitute.com/wp-content/uploads/2013/12/IMG_7835X.jpg',
-					title: '<p>Classic or Volume? Nothing is impossible for us!</p>'
-				}, {
-					image: 'http://eueyelashinstitute.com/wp-content/uploads/2014/01/4Dspecial.jpg',
-					title: '<p>"Love my 6D eyelashes and highly recommend them! FANTASTIC!"</p>'
-				}, {
-					image: 'http://eueyelashinstitute.com/wp-content/uploads/2014/01/IMG_7919-res.jpg',
-					title: '<p>Emphasis on striving to create 100% FLAWLESS masterpieces</p>'
-				}, {
-					image: 'http://www.eueyelashinstitute.com/wp-content/uploads/2013/12/ausra.jpg',
-					title: '<p>"Im utterly over the moon with my lashes!"</p>'
-				}
-			]
-
-		});
-	}
-
 	//.parallax(xPosition, speedFactor, outerHeight) options:
 	//xPosition - Horizontal position of the element
 	//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
