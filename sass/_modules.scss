@@ -1,0 +1,394 @@
+/***************MODULES******************/
+
+#menutoggle{
+	position:absolute;
+	top:9px;
+	right:9px;
+	&:hover{cursor: pointer;}
+	@media screen and (min-width: 761px) {
+	    display:none;
+	}
+
+}
+nav{
+	display:none;
+	font-size:0.75em;
+	font-weight:400;
+	font-family:helvetica,arial;
+	text-transform:uppercase;
+	#atme{
+		font-variant: normal;
+	}
+	>ul{
+		padding-right:1em;
+		padding-left: 1em;
+		border-right:1px solid $gray;
+		float:left;
+	}
+	ul.sub-menu{
+		display:none;
+		padding-left:16px;
+		margin-left:-16px;
+		padding-right:16px;
+		margin-right:-16px;
+		background:$gold;
+		font-variant: normal;
+		text-transform:capitalize;
+		line-height:2;
+		z-index:5;
+		position:absolute;
+		width:100%;
+		li{
+			border-top:1px solid lighten($gold,5%);
+			border-bottom:1px solid darken($gold,5%);
+			a{
+				color:$white;
+			}
+		}
+	}
+	@media screen and (min-width: 761px) {
+	    display:block;
+	    >ul{
+			padding-left:1em;
+			padding-right: 1em;
+			border-right:none;
+			border-left:1px solid $gray;
+			float:right;
+		}
+	}
+}
+
+#atme img {display:inline;}
+
+#main img{
+	&.alignright, &.alignleft, &.alignnone{
+	border:4px solid $grayLighter;
+	box-shadow: -2px 2px 2px $gray;}
+}
+
+.highlightarea{
+
+	li{overflow: hidden;
+		padding:0.5em 0;
+		font-size:1.2em;
+		border-top: 1px solid lighten($black,7%);
+		border-bottom: 1px solid darken($black,7%);
+		&:last-child{box-shadow: 0 1px 0 lighten($black,7%);}
+		&:first-child{box-shadow: 0 -1px 0 darken($black,7%);}
+		text-transform: capitalize;
+	}
+	#main & img{
+		&.alignright, &.alignleft, &.alignnone{
+		border:4px solid $grayLighter;
+		box-shadow: -2px 2px 2px $blacker;}
+	}
+
+}
+
+#footer {
+	img{float:left;}
+}
+
+//testimonials
+
+.testimonials {
+	#main{
+		background:$black;
+		.pagetitle{
+			background:$white;
+		}
+	}
+
+	blockquote {
+		color:$white;
+		border:1px solid $gold;
+		border-radius:5px;
+		p {padding:1em;}
+		footer{
+			text-align:right;
+				padding:0.5em 0;
+			cite{
+				padding:0.5em;
+				background:$gold;
+				border-top-left-radius: 5px;
+				font-weight: 700;
+				font-style: normal;
+			}
+		}
+	}
+	.clientavatar{display:none;}
+}
+#quoteplaceholder{display:none;}
+@media screen and (min-width: 761px) {
+    #quoteplaceholder{
+    	display:block;
+    	font-size:1.2em;
+		width:45%;
+		float:left;
+		color:$white;
+		border:1px solid $gold;
+		border-radius:5px;
+		p {padding:1em;}
+		footer{
+			text-align:right;
+				padding:0.5em 0;
+			cite{
+				padding:0.5em;
+				background:$gold;
+				border-top-left-radius: 5px;
+				border-bottom-right-radius: 4px;
+				font-style: normal;
+			}
+		}
+		&.fixed{
+			position:fixed;
+			top:43px;
+		}
+	}
+
+	.testimonials blockquote {
+		float:right;
+		margin-top:0;
+		width:45%;
+		margin-left:3%;
+		color:$white;
+		border:none;
+		border-radius:5px;
+		p {padding:1em;
+			padding-top: 0;
+			margin-top: 0;
+			height: 61px;
+			overflow:hidden;}
+		p~p{display:none;}
+		.clientavatar{
+			display:block;
+			float:left;
+			img{border-radius: 32px;}
+		}
+		footer{
+			display:none;
+			text-align:right;
+				padding:0.5em 0;
+			cite{
+				padding:7px;
+				background:$gold;
+				border-top-left-radius: 5px;
+				font-weight: 700;
+				font-style: normal;
+				display:none;
+			}
+		}
+	}
+	.testimonials .middle{@include pie-clearfix;padding:0 10%;}
+}
+
+/********** pricelist for beautique & studio ***/
+
+.pricelist .parapic{
+	background-image:url(http://eueyelashinstitute.com/wp-content/uploads/2013/12/right-cold-e1388171475945.jpg);
+}
+
+.productdetail{
+	border-radius: 5px;
+	border:1px solid $gray;
+	a{color:$white;}
+	a:hover{color:$gold;}
+	h3{
+		font-size:2.1em;
+		margin-bottom: 0;
+		padding:0.5em;
+	}
+	p{
+		margin:0;
+		font-style: italic;
+	}
+	h4.price{
+		@include inline-block;
+		float:right;
+		text-align:right;
+		background:$gold;
+		margin-bottom:0;
+		padding:0.5em;
+		border-bottom-right-radius: 5px;
+		border-top-left-radius: 5px;
+		font-weight:700;
+		font-size:1.6em;
+		&:hover{cursor: pointer;}
+	}
+		form.paypal-btn{
+		@include inline-block;
+		float:right;
+		text-align:right;
+		background:$gold;
+		margin-bottom:0;
+		padding:0.1em;
+		border-bottom-right-radius: 5px;
+		border-top-left-radius: 5px;
+		font-weight:700;
+		font-size:1.6em;
+		input{
+			color:$white;
+			font-family:$header-family;
+			font-weight: 700;
+			background:none;
+			border:none;
+			&:hover{cursor:pointer;}
+			&:active{border:none;}
+		}
+	}
+	&.equalheight {
+		h4.price,form.paypal-btn{
+			position:absolute;
+			bottom:0;
+			right:0;
+		}
+	}
+}
+
+.vcard{
+	.org .tel{
+		font-size:1.25em;
+		font-weight:700;
+		text-transform: uppercase;
+		font-family:$header-family;
+	}
+	.adr {
+		margin-top: 1.625em;
+	}
+	p{
+		margin-top: 0;
+	}
+}
+
+
+@media screen and (min-width: 761px) {
+    .pullquote{
+	width:40%;
+	float:right;
+	margin-left:5%;
+	padding-left:5%;
+	.apostrophe{
+		font-size:6em;
+		color:$gold;
+		font-family:georgia, serif;
+		vertical-align: bottom;
+		line-height:0.1;
+	}
+	p {
+		font-size:1.3em;
+		font-weight:700;
+		line-height:1.5;
+		margin-bottom:0;
+	}
+}
+
+}
+
+span.gold{color:$gold;}
+
+.wpcf7-form{
+p{
+	margin:0;
+}
+}
+
+
+#main .gallery {
+	padding:2em 10%;
+	max-width: 960px;
+	.gallery-item{
+		width:100%;
+	}
+	img{
+		border:4px solid $grayLighter;
+		box-shadow: -2px 2px 2px $gray;
+	}
+	@media screen and (min-width: 761px) {
+		.gallery-item{
+			width:33.33333%;
+		}
+	}
+}
+
+#ppal {
+	display:none;
+	background:$black;
+	color:$white;
+	margin:0;
+	position:fixed;
+	width:80%;
+	max-width:761px;
+	top:-100%;
+	left:10%;
+	border:10px solid $white;
+	z-index:100;
+	padding:1em;
+	.exit{
+		font-weight:700;
+		float:right;
+		cursor: pointer;
+	}
+}
+
+/******************SHOP STYLES******************/
+
+#wooshop{
+	max-width:960px;
+	padding:0px 10%;
+	.products{
+		font-size:1em;
+		li{
+			position:relative;
+			width:45%;
+			margin-right:10%;
+			&:nth-child(2n){margin-right:0;}
+			&.first{clear:none;}
+			a.button{
+				width:87%;
+				font-size: 0.871em;
+				text-align:center;
+			}
+		}
+	}
+	.product{
+		top:24px;
+	}
+	input.minus{
+		top:15px;
+	}
+	nav.woocommerce-breadcrumb{
+		font-size: 0.5em;
+		text-transform:lowercase;
+	}
+	h1.product_title.entry-title{
+		&:before,&:after{
+			position:relative;
+			border:none;
+		}
+		font-size:2em;
+		max-width:100%;
+	}
+
+	@media screen and (min-width: 480px) {
+			margin:0 auto;
+	   .products{
+			font-size:1em;
+			li{
+				width:30%;
+				margin-right:5%;
+				&:nth-child(2n){margin-right:5%;}
+				&:nth-child(3n){margin-right:0;}
+				&.first{clear:both;}
+				a.button{
+					width:93%;
+					font-size: 0.871em;
+				}
+			}
+		}
+	}
+
+}
+
+div[itemprop="description"]{
+	font-size:0.75em;
+}

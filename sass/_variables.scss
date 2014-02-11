@@ -1,0 +1,51 @@
+// Typography
+$base-font-size        :16px;
+$base-line-height      :26px;
+@include establish-baseline;
+
+$header-family: "josefin sans";
+$body-family: raleway;
+$mono-font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+// Grid ----------------------------------------------------------------------
+
+$total-cols             : 5;
+$col-width              : 4em;
+$gutter-width           : 1em;
+$side-gutter-width      : $gutter-width;
+
+$show-grid-backgrounds  : true;
+
+
+// Colours---------------------------------
+
+// Grays
+// -------------------------
+$black: #333;
+$blacker: #000;
+$grayDark: #444;
+$gray: #555;
+$grayLight: #999;
+$grayLighter: #eee;
+$white: #fff;
+
+
+// Accent colors
+// -------------------------
+$gold: #a0892c;
+$blue: #049cdb;
+$blueDark: #0064cd;
+$green: #46a546;
+$red: #9d261d;
+$yellow: #ffc40d;
+$orange: #f89406;
+$pink: #c3325f;
+$purple: #7a43b6;
+
+
+// Forms
+// -------------------------
+$input-background: $white;
+$input-border: #ccc;
+$input-disabled-background: $grayLighter;
+$input-height: $base-line-height + 10px; // base line-height + 8px vertical padding + 2px top/bottom border
+$horizontalComponentOffset: 180px !default;

@@ -1,0 +1,185 @@
+/* Layout ------------------------------------------------------------------*/
+html{min-height:100%;}
+body{margin:0;}
+body.home {
+	min-height:100%;
+	background-color:$black;
+}
+
+
+.container{
+@media screen and (min-width:  961px) {
+		width:100%;
+		margin:0 auto;
+	}
+}
+
+#header {
+	background:transparent url(img/60opacity.png);
+	max-width:960px;
+	margin:0 auto;
+	.branding{
+		width:100%;
+		@media screen and (min-width:  761px) {
+			width:35%;
+			float:left;
+			padding: 16px;
+		}
+	}
+	@include pie-clearfix;
+}
+
+#footer{
+	background:$white;
+	margin:0 auto;
+	width:80%;
+	padding:32px 16px;
+	text-align:right;
+	font-size:0.75em;
+	max-width:960px;
+	body.home &{
+		position:fixed;
+		top:92%;
+		margin:0 auto;
+	}
+}
+
+nav {
+	width:100%;
+	@media screen and (min-width:  761px) {
+		float: right;
+		width:60%;
+	}
+}
+
+/************** pages ***************/
+.pagetitle{text-align:center;}
+h1 {
+text-align:center;
+display:inline-block;
+max-width:60%;
+background:$white;
+position:relative;
+z-index:1;
+	&:before,&:after{
+		content:"";
+		width:100%;
+		border-bottom:2px solid $black;
+		position:absolute;
+		top:50%;
+	}
+	&:after{
+		left:110%;
+	}
+	&:before{
+		right:110%;
+	}
+}
+.intro{
+	padding: 2em 10%;
+}
+.parapic{
+	background:url(http://eueyelashinstitute.com/wp-content/uploads/2013/12/IMG_7953.jpg) center  no-repeat;
+	overflow:hidden;
+	background-size: cover;
+	margin-bottom:2em;
+	h3{
+		color:$white;
+		font-weight:700;
+		font-size:2.4em;
+		text-transform: uppercase;
+		margin-bottom:0;
+		padding-left:10%;
+		&+p{
+			padding-top:1em;
+		}
+	}
+	p{
+		color:white;
+		line-height:1.2;
+		font-size:1.6em;
+		margin:0;
+		padding:2em 2em 2em 10%;
+		width:60%;
+	}
+	.studio & {background:url(http://eueyelashinstitute.com/wp-content/uploads/2013/12/Mascara_Look-ret.jpg);
+		background-size: 100% auto;
+	h3{
+		color:$black;
+		text-shadow:8px 8px 6px transparentize($gray,0.5);}
+	}
+	.testimonials &{
+		background:url(http://eueyelashinstitute.com/wp-content/uploads/2013/12/IMG_7919.jpg) center  no-repeat;
+		background-position:center;
+		background-attachment:fixed;
+		background-size:100%;
+	}
+}
+.middle{
+	padding: 0 10%;
+}
+.bottom{
+	padding: 0 10%;
+}
+
+.middle.highlightarea{
+	padding-top:2.4em;
+	padding-bottom:2.4em;
+	background:$black;
+	color:$white;
+	a{
+		color:$gold;
+	}
+	h3{
+		text-transform: uppercase;
+		margin:0.25em 0;
+	}
+}
+
+.theprices{
+	background:$black;
+}
+.productdetail{
+	@include inline-block;
+	width:100%;
+	color:$white;
+	background:$black;
+	width:90%;
+	text-align:center;
+	margin:1em 5% 2em 5%;
+	@media screen and (min-width: 761px) {
+	    width:35%;
+		margin:1em 0 2em 10%;
+	}
+	@media screen and (min-width: 1260px) {
+	    width:24%;
+		margin:1em 0 2em 7%;
+	}
+
+
+}
+
+@media screen and (min-width: 761px) {
+	.intro{
+		padding: 2em 20%;
+	}
+	.parapic{
+		h3{
+			padding-left:20%;
+			font-size:4.8em;
+		}
+		p{
+			font-size:3.6em;
+			width:40%;
+			padding: 1em 20%;
+		}
+	}
+	.middle{
+		padding: 0 20%;
+	}
+	.bottom{
+		padding: 0 20%;
+	}
+
+}
+
