@@ -13,14 +13,21 @@
  * @since 		Starkers 4.0
  */
 ?>
-<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
-<!--Arrow Navigation-->
-<a id="prevslide" class="load-item"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/prev.png" alt=""></a>
-<a id="nextslide" class="load-item"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/next.png" alt=""></a>
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-<!--Slide captions displayed here-->
-<div id="slidecaption"></div>
+Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header-shop' ) );
 
+do_action( 'woocommerce_before_main_content' ); ?>
 
-<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/home-footer','parts/shared/html-footer') ); ?>
+<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
+<div class="pagetitle">
+	<h1><?php the_title(); ?></h1>
+</div>
+<?php the_content(); ?>
+
+<?php endwhile; ?>
+
+<?php do_action( 'woocommerce_after_main_content' ); ?>
+
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

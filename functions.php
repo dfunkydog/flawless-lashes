@@ -173,3 +173,10 @@ ob_start();
 $fragments['a.cart-contents'] = ob_get_clean();
 return $fragments;
 }
+add_filter( 'woocommerce_product_tabs', 'fl_woo_remove_reviews_tab', 98);
+function fl_woo_remove_reviews_tab($tabs) {
+
+ unset($tabs['reviews']);
+
+ return $tabs;
+}
