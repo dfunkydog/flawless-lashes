@@ -16,7 +16,7 @@
 
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header-shop' ) );
+Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) );
 
 do_action( 'woocommerce_before_main_content' ); ?>
 

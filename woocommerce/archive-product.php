@@ -11,7 +11,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header-shop' ) ); ?>
+Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+
 
 	<?php
 		/**
@@ -25,11 +26,11 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 
-			<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
+			<!-- <h1 class="page-title"><?php woocommerce_page_title(); ?></h1> -->
 
 		<?php endif; ?>
 
-		<?php do_action( 'woocommerce_archive_description' ); ?>
+		<h2><?php do_action( 'woocommerce_archive_description' ); ?></h2>
 
 		<?php if ( have_posts() ) : ?>
 
@@ -88,4 +89,4 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 		//do_action('woocommerce_sidebar');
 	?>
 
-<?php get_footer('shop'); ?>
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-footer', 'parts/shared/footer' ) ); ?>

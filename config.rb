@@ -27,9 +27,10 @@ sass_options = {:debug_info => true}
 # preferred_syntax = :sass
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
-# on_stylesheet_saved do |file|
-#   css = File.read(file)
-#   File.open(file, 'w') do |io|
-#     io << AutoprefixerRails.compile(css)
-#   end
-# end
+
+on_stylesheet_saved do |file|
+  css = File.read(file)
+  File.open(file, 'w') do |io|
+    io << AutoprefixerRails.compile(css)
+  end
+end

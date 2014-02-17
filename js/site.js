@@ -17,14 +17,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$('#menutoggle').click(function() {
-		if ($("nav").is(":visible")) {
-			$("nav").slideUp(function() {
-				$(this).removeAttr("style");
-			});
-		} else {
-			$("nav").slideDown();
-		}
+	$('.menu-icon').click(function() {
+		$('#secondarymenu').toggleClass('stashed');
 	});
 
 	//.parallax(xPosition, speedFactor, outerHeight) options:

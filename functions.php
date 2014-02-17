@@ -28,8 +28,10 @@
 	add_theme_support('post-thumbnails');
 
 	register_nav_menus(array(
-		'primary' => 'Primary Navigation',
-		'primary-2' => 'Primary Navigation Slot 2'
+		'primary' => 'Primary Navigation dropdown menu',
+		'footer-1' => 'Footer area 1 menu',
+		'footer-2' => 'Footer area 2 menu',
+		'footer-3' => 'Footer area 3 menu'
 		));
 
 	/* ========================================================================================================================
@@ -73,6 +75,11 @@
 
 		wp_register_script( 'plugins', get_template_directory_uri().'/js/plugins.js', array( 'jquery' ), '', true );
 		wp_enqueue_script( 'plugins' );
+
+		if(is_front_page()){
+			wp_register_script( 'slider', get_template_directory_uri().'/js/cycle2.min.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'slider' );
+		}
 
 		wp_register_script( 'site', get_template_directory_uri().'/js/site.js', array( 'jquery' ), '', true );
 		wp_enqueue_script( 'site' );
@@ -139,6 +146,7 @@ remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wra
 remove_action( 'woocommerce_before_cart', 'woocommerce_output_content_wrapper', 10);
 remove_action( 'woocommerce_after_cart', 'woocommerce_output_content_wrapper_end', 10);
 remove_action('woocommerce_sidebar','woocommerce_get_sidebar',10);
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
 add_action('woocommerce_before_main_content', 'my_theme_wrapper_start', 10);
 add_action('woocommerce_after_main_content', 'my_theme_wrapper_end', 10);
@@ -168,7 +176,7 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
 global $woocommerce;
 ob_start();
 ?>
-<a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a>
+<a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><img class="basket-icon" width="20" height="12" src="<?php echo get_stylesheet_directory_uri(); ?>/images/basket.png" alt=""><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a>
 <?php
 $fragments['a.cart-contents'] = ob_get_clean();
 return $fragments;
@@ -180,3 +188,4 @@ function fl_woo_remove_reviews_tab($tabs) {
 
  return $tabs;
 }
+

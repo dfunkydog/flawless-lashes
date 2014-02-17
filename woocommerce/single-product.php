@@ -11,7 +11,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header-shop' ) );  ?>
+Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) );  ?>
 
 	<?php
 		/**
@@ -47,4 +47,4 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 		do_action('woocommerce_sidebar');
 	?>
 
-<?php get_footer('shop'); ?>
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-footer', 'parts/shared/footer' ) ); ?>
