@@ -386,7 +386,10 @@ div[itemprop="description"]{
     border-color: #76456C;
     }
 }
-
+.cycle-slideshow{
+	border:8px solid $grayLighter;
+	background:$grayLighter;
+}
 .cycle-pager {
   color: $gold;
   height: 35px;
