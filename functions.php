@@ -67,7 +67,7 @@
 	 */
 
 	function starkers_script_enqueuer() {
-		wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Josefin+Sans:400,700|Raleway:400,700');
+		wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Ubuntu:300,500|Montserrat:400');
             wp_enqueue_style( 'googleFonts');
 
 		wp_register_style( 'screen', get_stylesheet_directory_uri().'/style.css', '', '', 'screen' );
@@ -189,3 +189,24 @@ function fl_woo_remove_reviews_tab($tabs) {
  return $tabs;
 }
 
+/**
+*limit related product
+**/
+function woo_related_products_limit() {
+  global $product;
+
+	$args = array(
+		'post_type'        		=> 'product',
+		'no_found_rows'    		=> 1,
+		'posts_per_page'   		=> 3,
+		'ignore_sticky_posts' 	=> 1,
+		'orderby'             	=> $orderby,
+		'post__in'            	=> $related,
+		'post__not_in'        	=> array($product->id)
+	);
+	return $args;
+}
+add_filter( 'woocommerce_related_products_args', 'woo_related_products_limit' );
+
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',30);
+add_Action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',15);

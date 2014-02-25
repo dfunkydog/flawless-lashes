@@ -283,25 +283,6 @@ p{
 	}
 }
 
-#ppal {
-	display:none;
-	background:$black;
-	color:$white;
-	margin:0;
-	position:fixed;
-	width:80%;
-	max-width:761px;
-	top:-100%;
-	left:10%;
-	border:10px solid $white;
-	z-index:100;
-	padding:1em;
-	.exit{
-		font-weight:700;
-		float:right;
-		cursor: pointer;
-	}
-}
 
 /******************SHOP STYLES******************/
 
@@ -320,10 +301,29 @@ p{
 				font-size: 0.871em;
 				text-align:center;
 			}
+			h3{
+				font-family:$body-family;
+				font-weight:300;
+				text-transform:lowercase;
+				font-variant: small-caps;
+				color:grayDark;
+				a &{color:$grayDark;}
+			}
 		}
 	}
 	.product{
 		top:24px;
+	}
+	.entry-summary {
+		h2{
+			line-height:1.333333em;
+		}
+		.price{
+			margin-top:0;
+		}
+	}
+	#tab-description h2 {
+		display:none;
 	}
 	input.minus{
 		top:15px;
@@ -348,48 +348,80 @@ p{
 			li{
 				width:30%;
 				margin-right:5%;
-				&:nth-child(2n){margin-right:5%;}
+				&:nth-child(2n){margin-right:5%;float:left;}
 				&:nth-child(3n){margin-right:0;}
 				&.first{clear:both;}
 				a.button{
 					width:93%;
 					font-size: 0.871em;
 				}
+				&.product{clear:none;}
 			}
+		}
+
+	}
+
+}
+
+
+/****************Overrides************/
+#wooshop{
+	 .woocommerce-message, .woocommerce-message {
+    border-top: 3px solid $gold;
+	}
+
+
+	.woocommerce-message:before, .woocommerce-page .woocommerce-message:before{
+		background-color:$gold;
+	}
+
+	#content input.button.alt, #respond input#submit.alt, a.button.alt, button.button.alt, input.button.alt, .woocommerce-page #content input.button.alt, .woocommerce-page #respond input#submit.alt, .woocommerce-page a.button.alt, .woocommerce-page button.button.alt, .woocommerce-page input.button.alt {
+		font-weight:400;
+	    background: linear-gradient($gold 0px, darken($gold,5%) 100%);
+	    border-color: #76456C;
+	    color: #FFFFFF;
+	    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+	    &:hover{
+	    	background: linear-gradient(saturate($gold,10%) 0px, saturate(darken($gold,5%),10%) 100%);
+	    border-color: #76456C;
+	    }
+	}
+	.variations label, div.product form.cart .variations label, .woocommerce-page #content div.product form.cart .variations label, .woocommerce-page div.product form.cart .variations label, #content .quantity input.qty, .quantity input.qty, .woocommerce-page #content .quantity input.qty, .quantity input.qty, .button, .woocommerce-tabs ul.tabs a{
+		font-weight:400;
+	}
+	.thumbnails .attachment-shop_thumbnail{
+		width:90px;
+	}
+}
+
+#slider-nav{
+	width:95%;
+	margin-left:2.5%;
+	top:-102px;
+	z-index:101;
+	@include pie-clearfix;
+	a{
+		width:48px;
+		height:48px;
+		text-indent:-9999px;
+		outline:0;
+		&#next{
+			float:right;
+			background:url(img/next.png) no-repeat;
+			background-size:contain;
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/next.png', sizingMethod='scale')";
+
+		}
+		&#prev{
+			float:left;
+			background:url(img/previous.png) no-repeat;
+			background-size:contain;
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/previous.png', sizingMethod='scale')";
 		}
 	}
 
 }
 
-div[itemprop="description"]{
-	font-size:0.75em;
-}
-
-
-/****************Overrides************/
-.woocommerce .woocommerce-message, .woocommerce-page .woocommerce-message {
-    border-top: 3px solid $gold;
-}
-
-
-.woocommerce .woocommerce-message:before, .woocommerce-page .woocommerce-message:before{
-	background-color:$gold;
-}
-
-.woocommerce #content input.button.alt, .woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .woocommerce-page #content input.button.alt, .woocommerce-page #respond input#submit.alt, .woocommerce-page a.button.alt, .woocommerce-page button.button.alt, .woocommerce-page input.button.alt {
-    background: linear-gradient($gold 0px, darken($gold,5%) 100%);
-    border-color: #76456C;
-    color: #FFFFFF;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
-    &:hover{
-    	background: linear-gradient(saturate($gold,10%) 0px, saturate(darken($gold,5%),10%) 100%);
-    border-color: #76456C;
-    }
-}
-.cycle-slideshow{
-	border:8px solid $grayLighter;
-	background:$grayLighter;
-}
 .cycle-pager {
   color: $gold;
   height: 35px;

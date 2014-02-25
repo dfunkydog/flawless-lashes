@@ -1,20 +1,44 @@
+div,
+article,
+section,
+header,
+footer,
+nav,
+li					{ position:relative; /* For absolutely positioning elements within containers (add more to the list if need be) */ }
+.group:after 		{ display:block; height:0; clear:both; content:"."; visibility:hidden; /* For clearing */ }
+body 				{ background:#fff; /* Don't forget to style your body to avoid user overrides */ }
+::-moz-selection 	{ background:#ff0; color:#333; }
+::selection 		{ background:#ff0; color:#333; }
+
 
 // Typography--------------------------------
+body,
+input,
+textarea 			{ font-weight:300; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 					{ font-weight:400; /* This helps to identify headings at the initial build stage, but you should write something more precise later on */ }
+
 body{font-family:$body-family;color:$black;}
 
 h1,h2,h3,h4,h5,h6{
 	font-family:$header-family;
+	color:$grayDark;
 }
 
 h1{
-	@include adjust-font-size-to(48px);
+	@include adjust-font-size-to(36px);
 }
 h2{
-	@include adjust-font-size-to(36px);
+	@include adjust-font-size-to(28px);
 }
 
 h3{
-	@include adjust-font-size-to(28px);
+	@include adjust-font-size-to(21px);
 }
 p{
 	@include trailer();
@@ -23,6 +47,18 @@ a{
 	text-decoration: none;
 	color:$black;
 }
+#wooshop th {font-weight:400;}
+
+
+
+/* Retina Display
+@media screen and (-webkit-min-device-pixel-ratio:2) {
+
+					{ Place your styles here for all 'Retina' screens }
+
+}
+
+*/
 
 /*
  * Lists
