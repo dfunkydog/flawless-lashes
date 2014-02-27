@@ -55,34 +55,23 @@ h2.product_title{
 	img{float:left;}
 }
 
-//testimonials
-
-.testimonials {
-	#main{
-		background:$black;
-		.pagetitle{
-			background:$white;
-		}
-	}
-
-	blockquote {
+#welcomeblock{
+	background:$gold;
+	color:$white;
+	padding:0;
+	margin:-48px 0 0 0;
+	h3{
 		color:$white;
-		border:1px solid $gold;
-		border-radius:5px;
-		p {padding:1em;}
-		footer{
-			text-align:right;
-				padding:0.5em 0;
-			cite{
-				padding:0.5em;
-				background:$gold;
-				border-top-left-radius: 5px;
-				font-weight: 700;
-				font-style: normal;
-			}
+		margin:0;
+		padding-top:1em;
+		padding-left:0;
+		margin-left:0;
+		font-family: $body-family;
+		@media screen and (min-width: 761px){
+			float:left;
+			width:50%;
 		}
 	}
-	.clientavatar{display:none;}
 }
 
 table.shop_attributes{
@@ -119,40 +108,7 @@ table.shop_attributes{
 		}
 	}
 
-	.testimonials blockquote {
-		float:right;
-		margin-top:0;
-		width:45%;
-		margin-left:3%;
-		color:$white;
-		border:none;
-		border-radius:5px;
-		p {padding:1em;
-			padding-top: 0;
-			margin-top: 0;
-			height: 61px;
-			overflow:hidden;}
-		p~p{display:none;}
-		.clientavatar{
-			display:block;
-			float:left;
-			img{border-radius: 32px;}
-		}
-		footer{
-			display:none;
-			text-align:right;
-				padding:0.5em 0;
-			cite{
-				padding:7px;
-				background:$gold;
-				border-top-left-radius: 5px;
-				font-weight: 700;
-				font-style: normal;
-				display:none;
-			}
-		}
-	}
-	.testimonials .middle{@include pie-clearfix;padding:0 10%;}
+
 }
 
 /********** pricelist for beautique & studio ***/
@@ -394,6 +350,7 @@ p{
 	}
 }
 
+img.cycle-slide{width:100%;}
 #slider-nav{
 	width:95%;
 	margin-left:2.5%;
@@ -435,4 +392,8 @@ p{
 	color:lighten(saturate($gold,10%),10%);
   }
 }
+}
+
+#fl-woo-share .fb_iframe_widget.fb-like>span{
+	vertical-align: baseline !important;
 }
