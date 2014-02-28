@@ -499,7 +499,7 @@ function fl_gallery($attr) {
 		$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
 	} else {
 		$output = "<div id='$selector' class='fl-gallery'>\n";
-		$output .="<div class='cycle-slideshow' data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
+		$output .="<div class='cycle-slideshow' data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
 	}
 
 
@@ -537,7 +537,28 @@ function fl_gallery($attr) {
 	} else {
 		foreach ($attachments as $id => $attachment) {
 			$image_output = wp_get_attachment_image( $id, $size, false );
+			$output .="<div>";
 			$output .= $image_output;
+			if ( $captiontag && trim($attachment->post_excerpt) ) {
+				$custom_url = get_post_meta( $id, '_gallery_link_url', true );
+				if(wp_get_attachment_url( $id )){
+					$output .= "<div class='caption_overlay'>\n
+					<h3>" . wp_get_attachment_link( $id,'') . "</h3>
+					<p><a href='". $custom_url ."'>
+					" . wptexturize($attachment->post_excerpt) . "
+					</a></p>\n
+					</div>";
+				}else{
+				$output .= "<div class='caption_overlay'>\n
+					<h3>" . wptexturize($attachment->post_title) . "</h3>
+					<p>
+					" . wptexturize($attachment->post_excerpt) . "
+					</p>\n
+					</div>";
+				}
+			}
+			$output .="</div>";
+
 		}
 	}
 
@@ -551,3 +572,48 @@ function fl_gallery($attr) {
 
 	return $output;
 }
+
+/*****ADD STYLE BUTTON IN WORDPRESS GALLERY*/
+
+
+add_action('print_media_templates', function(){
+
+  // define your backbone template;
+  // the "tmpl-" prefix is required,
+  // and your input field should have a data-setting attribute
+  // matching the shortcode name
+  ?>
+  <script type="text/html" id="tmpl-my-custom-gallery-setting">
+    <label class="setting">
+      <span><?php _e('type'); ?></span>
+      <select data-setting="type">
+        <option value="default_style"> default_style </option>
+        <option value="slider"> Slider </option>
+      </select>
+    </label>
+  </script>
+
+  <script>
+
+    jQuery(document).ready(function(){
+
+      // add your shortcode attribute and its default value to the
+      // gallery settings list; $.extend should work as well...
+      _.extend(wp.media.gallery.defaults, {
+        my_custom_attr: 'default_val'
+      });
+
+      // merge default gallery settings template with yours
+      wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend({
+        template: function(view){
+          return wp.media.template('gallery-settings')(view)
+               + wp.media.template('my-custom-gallery-setting')(view);
+        }
+      });
+
+    });
+
+  </script>
+  <?php
+
+});

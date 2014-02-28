@@ -58,8 +58,9 @@ h2.product_title{
 #welcomeblock{
 	background:$gold;
 	color:$white;
-	padding:0;
-	margin:-48px 0 0 0;
+	padding:1em 2em;
+	margin:0;
+	p{overflow:hidden;}
 	h3{
 		color:$white;
 		margin:0;
@@ -67,6 +68,8 @@ h2.product_title{
 		padding-left:0;
 		margin-left:0;
 		font-family: $body-family;
+		font-weight:300;
+		font-size:1.5625em;
 		@media screen and (min-width: 761px){
 			float:left;
 			width:50%;
@@ -80,42 +83,9 @@ table.shop_attributes{
 	}
 }
 
-
-@media screen and (min-width: 761px) {
-    #quoteplaceholder{
-    	display:block;
-    	font-size:1.2em;
-		width:45%;
-		float:left;
-		color:$white;
-		border:1px solid $gold;
-		border-radius:5px;
-		p {padding:1em;}
-		footer{
-			text-align:right;
-				padding:0.5em 0;
-			cite{
-				padding:0.5em;
-				background:$gold;
-				border-top-left-radius: 5px;
-				border-bottom-right-radius: 4px;
-				font-style: normal;
-			}
-		}
-		&.fixed{
-			position:fixed;
-			top:43px;
-		}
-	}
-
-
-}
-
 /********** pricelist for beautique & studio ***/
 
-.pricelist .parapic{
-	background-image:url(http://eueyelashinstitute.com/wp-content/uploads/2013/12/right-cold-e1388171475945.jpg);
-}
+
 
 .productdetail{
 	border-radius: 5px;
@@ -350,11 +320,34 @@ p{
 	}
 }
 
-img.cycle-slide{width:100%;}
+.cycle-slideshow{
+	margin-bottom:-8px;
+}
+.cycle-slide{
+	width:100%;
+	img{
+		width:100%;
+	}
+}
+.caption_overlay{
+	background:transparentize($white,.2);
+	h3{text-align: center;
+		text-transform: uppercase;
+		margin-top: 0;
+	}
+	@media screen and (min-width: 761px){
+		padding:1em;
+		width:40%;
+		position:absolute;
+		top:5%;
+		left:5%;
+	}
+}
 #slider-nav{
+	position:absolute;
+	bottom:50%;
 	width:95%;
 	margin-left:2.5%;
-	top:-102px;
 	z-index:101;
 	@include pie-clearfix;
 	a{
@@ -376,7 +369,10 @@ img.cycle-slide{width:100%;}
 			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/previous.png', sizingMethod='scale')";
 		}
 	}
+	@media screen and (min-width: 761px){
 
+	bottom:10%;
+	}
 }
 
 .cycle-pager {
@@ -387,11 +383,11 @@ img.cycle-slide{width:100%;}
   z-index: 12;
   span {
   	cursor: pointer;
-  font-size: 48px;
-  &.cycle-pager-active {
-	color:lighten(saturate($gold,10%),10%);
-  }
-}
+	  font-size: 48px;
+	  &.cycle-pager-active {
+		color:lighten(saturate($gold,10%),10%);
+	  }
+	}
 }
 
 #fl-woo-share .fb_iframe_widget.fb-like>span{

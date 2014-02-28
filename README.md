@@ -17,3 +17,8 @@ via "autoprefixer". How that is done is very
 much dependant on the dev environment.
 
 Take a look and edit config.rb if necessary.
+
+##Slider Gallery##
+Images ratio best at 16:9
+
+Use wordpress gallery select **type:slider**
