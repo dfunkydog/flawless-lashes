@@ -22,14 +22,13 @@ body{margin:0;}
 	position:fixed;
 	width:90%;
 	max-width:960px;
-	border-bottom: 1px solid $grayLight;
 	.loginarea,.cart-contents, .telephone{
 		float:right;
 		margin-left: 20px;
 	}
 }
 #brandingsearch{
-	padding-top:50px;
+	padding-top:32px;
 	width:100%;
 }
 #search-container{
@@ -51,7 +50,6 @@ nav.shop-nav{
 		@include inline-block;
 	}
 }
-
 
 .related{
 	clear:both;

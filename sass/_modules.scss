@@ -21,7 +21,6 @@
 	background:$white;
 	.menu-icon{
 		padding-right:10px;
-		border-right:1px solid $grayLight;
 	}
 }
 
@@ -84,7 +83,6 @@ table.shop_attributes{
 }
 
 /********** pricelist for beautique & studio ***/
-
 
 
 .productdetail{
@@ -321,7 +319,8 @@ p{
 }
 
 .cycle-slideshow{
-	margin-bottom:-8px;
+	border-top:3px solid $gold;
+	margin-bottom:-7px;
 }
 .cycle-slide{
 	width:100%;
