@@ -80,7 +80,6 @@
 			wp_register_script( 'slider', get_template_directory_uri().'/js/cycle2.min.js', array( 'jquery' ), '', true );
 		wp_enqueue_script( 'slider' );
 		}
-
 		wp_register_script( 'site', get_template_directory_uri().'/js/site.js', array( 'jquery' ), '', true );
 		wp_enqueue_script( 'site' );
 
@@ -140,7 +139,12 @@ return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" >'
 . do_shortcode( $content ) . '<p class="wp-caption-text">' . $caption . '</p></div>';
 }
 
-/////////////wooooooooooooooooooooo//////////////
+/* ========================================================================================================================
+
+Integrate wocommerce via hooks.
+
+======================================================================================================================== */
+
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 remove_action( 'woocommerce_before_cart', 'woocommerce_output_content_wrapper', 10);
@@ -163,13 +167,23 @@ function my_theme_wrapper_end() {
 
 add_theme_support( 'woocommerce' );
 
-add_filter( 'woocommerce_breadcrumb_defaults', 'jk_change_breadcrumb_delimiter' );
-function jk_change_breadcrumb_delimiter( $defaults ) {
-// Change the breadcrumb delimeter from '/' to '>'
+
+/*=========================
+
+woocommerce customisations
+
+=========================*/
+
+// Change the breadcrumb delimeter from '/' to '»'
+add_filter( 'woocommerce_breadcrumb_defaults', 'fl_breadcrumb_delimiter' );
+function fl_breadcrumb_delimiter( $defaults ) {
 $defaults['delimiter'] = ' &raquo; ';
 return $defaults;
 }
 
+/*-----------------------
+add cart to header area
+-----------------------*/
 add_filter('add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
 
 function woocommerce_header_add_to_cart_fragment( $fragments ) {
@@ -189,9 +203,11 @@ function fl_woo_remove_reviews_tab($tabs) {
  return $tabs;
 }
 
-/**
-*limit related product
-**/
+
+/*-----------------------
+limit related product to 3
+-----------------------*/
+
 function woo_related_products_limit() {
   global $product;
 
@@ -211,7 +227,15 @@ add_filter( 'woocommerce_related_products_args', 'woo_related_products_limit' );
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',30);
 add_Action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',15);
 
-/***********add share buttons under add to cart ******/
+
+// Display 18 products per page
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 18;' ), 20 );
+
+
+/*-----------------------------------
+add share buttons under add to cart
+-----------------------------------*/
+
 add_action('woocommerce_share','wooshare');
 function wooshare(){
 	echo'<div id="fl-woo-share">
@@ -247,134 +271,17 @@ function wooshare(){
 	<?php
 }
 
-/***********Alternative gallery*************/
+
+/*===============================================================
+
+Customize wordpress gallery
+
+===============================================================*/
+
 remove_shortcode('gallery', 'gallery_shortcode');
 add_shortcode( 'gallery','fl_gallery' );
-function flw_gallery($attr){
-
-	$post = get_post();
-
-	static $instance = 0;
-	$instance++;
-
-	if ( ! empty( $attr['ids'] ) ) {
-		// 'ids' is explicitly ordered, unless you specify otherwise.
-		if ( empty( $attr['orderby'] ) )
-			$attr['orderby'] = 'post__in';
-		$attr['include'] = $attr['ids'];
-	}
-
-	// Allow plugins/themes to override the default gallery template.
-	$output = apply_filters('post_gallery', '', $attr);
-	if ( $output != '' )
-		return $output;
-
-	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
-	if ( isset( $attr['orderby'] ) ) {
-		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-		if ( !$attr['orderby'] )
-			unset( $attr['orderby'] );
-	}
-
-	extract(shortcode_atts(array(
-		'order'      => 'ASC',
-		'orderby'    => 'menu_order ID',
-		'id'         => $post ? $post->ID : 0,
-		'itemtag'    => '',
-		'icontag'    => '',
-		'captiontag' => '',
-		'columns'    => 3,
-		'size'       => 'fullsize',
-		'include'    => '',
-		'exclude'    => '',
-		'link'       => ''
-	), $attr, 'gallery'));
 
 
-	$id = intval($id);
-	if ( 'RAND' == $order )
-		$orderby = 'none';
-
-	if ( !empty($include) ) {
-		$_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-
-		$attachments = array();
-		foreach ( $_attachments as $key => $val ) {
-			$attachments[$val->ID] = $_attachments[$key];
-		}
-	} elseif ( !empty($exclude) ) {
-		$attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-	} else {
-		$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-	}
-
-	if ( empty($attachments) )
-		return '';
-
-	if ( is_feed() ) {
-		$output = "\n";
-		foreach ( $attachments as $att_id => $attachment )
-			$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
-		return $output;
-	}
-
-	$itemtag = tag_escape($itemtag);
-	$captiontag = tag_escape($captiontag);
-	$icontag = tag_escape($icontag);
-	$valid_tags = wp_kses_allowed_html( 'post' );
-	if ( ! isset( $valid_tags[ $itemtag ] ) )
-		$itemtag = '';
-	if ( ! isset( $valid_tags[ $captiontag ] ) )
-		$captiontag = '';
-	if ( ! isset( $valid_tags[ $icontag ] ) )
-		$icontag = '';
-
-	$columns = intval($columns);
-	$itemwidth = $columns > 0 ? floor(100/$columns) : 100;
-	$float = is_rtl() ? 'right' : 'left';
-
-	//$selector = "gallery-{$instance}";
-	$selector = "maximage";
-
-	$gallery_style = $gallery_div = '';
-	if ( apply_filters( 'use_default_gallery_style', true ) )
-		$gallery_style = "";
-	$size_class = sanitize_html_class( $size );
-	$gallery_div = "<div id='$selector' class='mc-cycle gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
-	$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
-
-	$i = 0;
-	foreach ( $attachments as $id => $attachment ) {
-		if ( ! empty( $link ) && 'file' === $link )
-			$image_output = wp_get_attachment_link( $id, $size, false, false );
-		elseif ( ! empty( $link ) && 'none' === $link )
-			$image_output = wp_get_attachment_image( $id, $size, false, array( 'class' => 'mc-image','title'=>$post->post_title) );
-		else
-			$image_output = wp_get_attachment_link( $id, $size, true, false );
-
-		$image_meta  = wp_get_attachment_metadata( $id );
-
-		$orientation = '';
-		if ( isset( $image_meta['height'], $image_meta['width'] ) )
-			$orientation = ( $image_meta['height'] > $image_meta['width'] ) ? 'portrait' : 'landscape';
-
-
-		$output .= $image_output;
-		if ( $captiontag && trim($attachment->post_excerpt) ) {
-			$output .= wptexturize($attachment->post_excerpt);
-		}
-
-	}
-
-	$output .= "
-		</div>\n";
-
-
-	return $output;
-
-		}
-
-		/*****END OF CUSTOM GALLERY ****/
 
 		/**
  * The Gallery shortcode.
@@ -499,7 +406,7 @@ function fl_gallery($attr) {
 		$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
 	} else {
 		$output = "<div id='$selector' class='fl-gallery'>\n";
-		$output .="<div class='cycle-slideshow' data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
+		$output .="<div class='cycle-slideshow'  data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
 	}
 
 
@@ -571,8 +478,7 @@ function fl_gallery($attr) {
 		}
 
 	return $output;
-}
-
+}// END OF CUSTOM GALLERY
 /*****ADD STYLE BUTTON IN WORDPRESS GALLERY*/
 
 
@@ -617,3 +523,43 @@ add_action('print_media_templates', function(){
   <?php
 
 });
+
+/*======================================
+
+Facebook opengraph and other meta data
+
+======================================*/
+
+//Adding the Open Graph in the Language Attributes
+function add_opengraph_doctype( $output ) {
+		return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	}
+add_filter('language_attributes', 'add_opengraph_doctype');
+
+// add Open Graph Meta Info
+
+function insert_og_info() {
+	global $post;
+	if ( !is_singular()) //if it is not a post or a page
+		return;
+        echo '<meta property="fb:admins" content="YOUR USER ID"/>';
+        echo '<meta property="og:title" content="' . get_the_title() . '"/>';
+        echo '<meta property="og:type" content="article"/>';
+        echo '<meta property="og:description" content=" '. get_the_excerpt() . ' "/>';
+        echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+        echo '<meta property="og:site_name" content="' . get_bloginfo ( 'name' ) .'"/>';
+	if(!has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
+		$default_image="http://example.com/image.jpg"; //replace this with a default image on your server or an image in your media library
+		echo '<meta property="og:image" content="' . $default_image . '"/>';
+	}
+	else{
+		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+		echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
+	}
+	echo "";
+
+    echo '<meta name="twitter:card" content="summary"/>';
+	echo '<meta name="twitter:site" content="@your_twitter_handle"/>';
+
+}
+add_action( 'wp_head', 'insert_og_info', 5 );

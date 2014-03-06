@@ -47,4 +47,4 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 		do_action('woocommerce_sidebar');
 	?>
 
-<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-footer', 'parts/shared/footer' ) ); ?>
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

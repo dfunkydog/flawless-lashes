@@ -2,9 +2,8 @@
 
 
 #secondarymenu{
-	transition:transform 0.5s linear;
+	margin-top:30px;
 	position: fixed;
-	transform:translateY(30px);
 	background:$white;
 	width: 150px;
 	padding-left:10px;
@@ -12,7 +11,7 @@
 	border:1px solid $grayLight;
 	border-top:none;
 	&.stashed {
-		transform:translateY(-100%);
+		top:-100%;
 	}
 }
 #loginbasketgroup{
@@ -21,6 +20,13 @@
 	background:$white;
 	.menu-icon{
 		padding-right:10px;
+	}
+	a.telephone{
+		display:none;
+		@media screen and (min-width: 480px) {
+		    display:block;
+		}
+
 	}
 }
 
@@ -55,15 +61,15 @@ h2.product_title{
 }
 
 #welcomeblock{
-	background:$gold;
-	color:$white;
-	padding:1em 2em;
+	padding:0.8125em 1.625em;
+	border-bottom:1px solid $grayLight;
+    border-top:1px solid $grayLight;
 	margin:0;
-	p{overflow:hidden;}
+	p{overflow:hidden;margin-bottom:0.8125em;}
 	h3{
-		color:$white;
+		color:$gold;
 		margin:0;
-		padding-top:1em;
+		padding-top:0.8125em;
 		padding-left:0;
 		margin-left:0;
 		font-family: $body-family;
@@ -319,13 +325,18 @@ p{
 }
 
 .cycle-slideshow{
-	border-top:3px solid $gold;
-	margin-bottom:-7px;
+	border-top:8px solid $black;
 }
 .cycle-slide{
 	width:100%;
+	margin:0;
+	padding:0;
 	img{
+        display:block;
+		margin:0;
+		padding:0;
 		width:100%;
+		height:auto;
 	}
 }
 .caption_overlay{
@@ -338,8 +349,8 @@ p{
 		padding:1em;
 		width:40%;
 		position:absolute;
-		top:5%;
-		left:5%;
+		top:26px;
+		left:26px;
 	}
 }
 #slider-nav{

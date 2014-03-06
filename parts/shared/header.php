@@ -5,9 +5,10 @@
 		</div>
 	<div id="loginbasketgroup">
 	<svg height="30" width="30" class="menu-icon">
-			<g transform="translate(-218.6,-473.9)">
-				<path fill="#666" d="m225.6 486.9 26 0 0 4-26 0zM225.6 494.9l26 0 0 4-26 0zM225.6 478.9l26 0 0 4-26 0z"/>
-			</g>
+			<switch><g transform="translate(-225.58,-473.9)">
+							<path fill="#666" d="m225.6 486.9 26 0 0 4-26 0zM225.6 494.9l26 0 0 4-26 0zM225.6 478.9l26 0 0 4-26 0z"/>
+						</g>
+						<foreignObject><img alt="" width="30px" height="30px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABPSURBVEiJ7dQxDgAgCANAcDF+lG/xTcKCk09QktpuTJdAilaVdGS0qIRfRs0sRGTehjJzuXuc+b9V992YDwQeZo/xYfYYH2aP8WH2mPC1bBu+JCEZiQ6WAAAAAElFTkSuQmCC" /></foreignObject></switch>
 		</svg>
 		<?php global $woocommerce; ?>
 		<a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><img class="basket-icon" width="20" height="12" src="<?php echo get_stylesheet_directory_uri(); ?>/images/basket.png" alt=""><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a>

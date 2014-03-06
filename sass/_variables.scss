@@ -1,4 +1,5 @@
 // Typography
+//--------------
 $base-font-size        :16px;
 $base-line-height      :26px;
 @include establish-baseline;
@@ -17,11 +18,11 @@ $show-grid-backgrounds  : true;
 
 
 // Colours---------------------------------
-
+//-
 // Grays
 // -------------------------
-$black: #333;
 $blacker: #000;
+$black: #333;
 $grayDark: #444;
 $gray: #555;
 $grayLight: #999;
