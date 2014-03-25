@@ -50,7 +50,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php woocommerce_get_template_part( 'content', 'product' ); ?>
+					<?php wc_get_template_part( 'content', 'product' ); ?>
 
 				<?php endwhile; // end of the loop. ?>
 
@@ -67,7 +67,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 
 		<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
 
-			<?php woocommerce_get_template( 'loop/no-products-found.php' ); ?>
+			<?php wc_get_template( 'loop/no-products-found.php' ); ?>
 
 		<?php endif; ?>
 
@@ -77,7 +77,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 		 *
 		 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
 		 */
-		do_action('woocommerce_after_main_content');
+		do_action( 'woocommerce_after_main_content');
 	?>
 
 	<?php
