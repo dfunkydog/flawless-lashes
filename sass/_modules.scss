@@ -1,3 +1,4 @@
+
 /***************MODULES******************/
 
 
@@ -26,7 +27,6 @@
 		@media screen and (min-width: 480px) {
 		    display:block;
 		}
-
 	}
 }
 
@@ -271,21 +271,24 @@ p{
 		max-width:100%;
 	}
 
+span.onsale{z-index:5;}
+
 	@media screen and (min-width: 480px) {
 			margin:0 auto;
-	   .products{
+	   ul.products{
 			font-size:1em;
 			li{
+
 				width:30%;
 				margin-right:5%;
 				&:nth-child(2n){margin-right:5%;float:left;}
 				&:nth-child(3n){margin-right:0;}
-				&.first{clear:both;}
+                &.product{clear:none;&:nth-child(3n+1){clear:left;}}
+
 				a.button{
 					width:93%;
 					font-size: 0.871em;
 				}
-				&.product{clear:none;}
 			}
 		}
 

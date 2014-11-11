@@ -23,7 +23,7 @@ if ( $attachment_ids ) {
 		foreach ( $attachment_ids as $attachment_id ) {
 
 			$classes = array( 'zoom' );
-
+			//removes classes to use nth child
 
 			$image_link = wp_get_attachment_url( $attachment_id );
 

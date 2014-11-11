@@ -406,7 +406,7 @@ function fl_gallery($attr) {
 		$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
 	} else {
 		$output = "<div id='$selector' class='fl-gallery'>\n";
-		$output .="<div class='cycle-slideshow'  data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
+		$output .="<div class='cycle-slideshow' data-cycle-swipe='true' data-cycle-timeout='7000' data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
 	}
 
 
@@ -563,3 +563,26 @@ function insert_og_info() {
 
 }
 add_action( 'wp_head', 'insert_og_info', 5 );
+
+// Workaround for the mysterious bug in Woocommerce that prevents order emails
+// from being sent.
+
+add_action( 'woocommerce_thankyou', 'order_email_workaround' );
+
+function order_email_workaround ($order_id) {
+    global $woocommerce;
+    $mailer = $woocommerce->mailer();
+    // Email customer with order-processing receipt
+    $email = $mailer->emails['WC_Email_Customer_Processing_Order'];
+    $email->trigger( $order_id );
+    // Email admin with new order email
+    $email = $mailer->emails['WC_Email_New_Order'];
+    $email->trigger( $order_id );
+}
+
+//remove built in styles each style one by one
+add_filter( 'woocommerce_enqueue_styles', 'jk_dequeue_styles' );
+function jk_dequeue_styles( $enqueue_styles ) {
+unset( $enqueue_styles['woocommerce-smallscreen'] ); // Remove the smallscreen optimisation
+return $enqueue_styles;
+}
