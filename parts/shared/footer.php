@@ -8,4 +8,6 @@
 		</div>
 		<div class="copyright">
 			&copy; <?php echo date("Y"); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.</div>
+			<a href="https://plus.google.com/107689856055514328406" rel="publisher">Google+</a>
 	</footer>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>

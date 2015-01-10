@@ -49,7 +49,7 @@ foreach( $product_categories as $cat ) {
 echo '<li><a href="'. get_site_url().'/?product_cat='. $cat->slug .'">'. $cat->name . '</a></li>';
 }
 ?>
-
+<li><a href="http://eueyelashinstitute.com/"></a>EU Eyelash Institute</li>
 </ul>
 </nav>
 <div id="main">

@@ -195,7 +195,9 @@ ob_start();
 $fragments['a.cart-contents'] = ob_get_clean();
 return $fragments;
 }
-add_filter( 'woocommerce_product_tabs', 'fl_woo_remove_reviews_tab', 98);
+
+
+//add_filter( 'woocommerce_product_tabs', 'fl_woo_remove_reviews_tab', 98);
 function fl_woo_remove_reviews_tab($tabs) {
 
  unset($tabs['reviews']);
@@ -267,6 +269,11 @@ function wooshare(){
 	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=281787978603249";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+	<!-- Place this tag where you want the share button to render. -->
+	<div class="g-plus" data-action="share" data-annotation="none"></div>
 </div>
 	<?php
 }
@@ -558,8 +565,8 @@ function insert_og_info() {
 	}
 	echo "";
 
-    echo '<meta name="twitter:card" content="summary"/>';
-	echo '<meta name="twitter:site" content="@your_twitter_handle"/>';
+    echo '<meta name="twitter:card" content="summary_large_image"/>';
+	echo '<meta name="twitter:site" content="@FlawlessLLashes"/>';
 
 }
 add_action( 'wp_head', 'insert_og_info', 5 );
@@ -586,3 +593,31 @@ function jk_dequeue_styles( $enqueue_styles ) {
 unset( $enqueue_styles['woocommerce-smallscreen'] ); // Remove the smallscreen optimisation
 return $enqueue_styles;
 }
+
+function fl_title(){
+if(is_product()){
+
+$postid = $post->ID;
+
+$seo_title = get_post_meta($postid, 'seo_title',true);
+
+if ($seo_title) : echo $seo_title; else: echo wp_title( ''); endif;
+} else
+	{echo 'Semi permanent eyelash products'. wp_title( '|' ); }
+}
+
+add_action('wp_head', 'fl_analytics');
+function fl_analytics() { ?>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-58398931-1', 'auto');
+	  ga('send', 'pageview');
+
+</script>
+
+</script>
+<?php }

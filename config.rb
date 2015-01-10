@@ -1,8 +1,6 @@
 require 'susy'
 # Require any additional compass plugins here.
-require "execjs"
-require 'autoprefixer-rails'
-require 'csso'
+
 
 # Set this to the root of your project when deployed:
 http_path = "/"
@@ -13,7 +11,7 @@ javascripts_dir = "js"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
-#output_style = :compressed
+output_style = :compact
 # sass_options = {:debug_info => true}
 # enable_sourcemaps = true
 # sass_options = {:sourcemap => true}
@@ -30,9 +28,3 @@ line_comments = false
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
 
-# on_stylesheet_saved do |file|
-#   css = File.read(file)
-#   File.open(file, 'w') do |io|
-#     io << AutoprefixerRails.compile(css)
-#   end
-# end
