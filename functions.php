@@ -595,14 +595,19 @@ return $enqueue_styles;
 }
 
 function fl_title(){
-if(is_product()){
-
+	global $post;
 $postid = $post->ID;
 
 $seo_title = get_post_meta($postid, 'seo_title',true);
 
+if(is_product()){
+
+
 if ($seo_title) : echo $seo_title; else: echo wp_title( ''); endif;
-} else
+} elseif(is_product_category() ){
+	{echo strip_tags(category_description( ) ); }
+}
+else
 	{echo 'Semi permanent eyelash products'. wp_title( '|' ); }
 }
 

@@ -30,7 +30,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 
 		<?php endif; ?>
 
-		<h2><?php do_action( 'woocommerce_archive_description' ); ?></h2>
+		<!-- <h2><?php do_action( 'woocommerce_archive_description' ); ?></h2> -->
 
 		<?php if ( have_posts() ) : ?>
 
