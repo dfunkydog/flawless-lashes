@@ -58,21 +58,25 @@ footer{
 	background: $grayDark;
 	width:100%;
 	.colophon{
-		@include cf();
-		width:100%;
+		width:90%;
 		max-width:960px;
-		margin:0 auto;
+		margin:2em auto;
+		@include cf();
 		color:$white;
 		line-height:1;
 		font-size:0.625em;
 		padding-bottom:2em;
 		a{color:$grayLighter;}
-		& > div{
-			float:left;
-			margin-right: 2em;
+
+		.copyright{
+			padding-top:4em;
+			@include cf();
 		}
-		.copyright{padding-top:4em;}
-		.cards{width:265px;padding-top:2.6em;}
+		.cards{padding-top:2.6em;}
+		.security{
+			width:100%;
+			margin:2em auto;
+		}
 		.seal{width:108px;}
 	}
 

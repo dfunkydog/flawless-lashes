@@ -7,18 +7,18 @@
 			<?php wp_nav_menu( array( 'theme_location' => 'footer-3', 'container' => false ) ); ?>
 		</div>
 		<div class="colophon">
-			<div class="copyright">&copy; <?php echo date("Y"); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.
-			</div>
-			<div class="seal">
+
+			<div class="cards">
+				<a href="http://www.sagepay.co.uk/support/online-shoppers/about-sage-pay" onclick="javascript:window.open('http://www.sagepay.co.uk/support/online-shoppers/about-sage-pay','What is SagePay','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" title="What is SagePay?">
+				<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/sage.png" width="181" height="55" alt="Payments By SagePay"></a>
+
 				<script type="text/javascript" src="https://sealserver.trustwave.com/seal.js?code=cbf2214823f949b99b8f53fbb2d0a741">
 				</script>
+				<a href="http://www.mastercard.co.uk/securecode.html"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/securecode.png" width="110" height="55" alt="matercard securecode"></a>
+				<a href="http://www.visaeurope.com/making-payments/verified-by-visa/"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/verified-by-visa.jpg" width="110" height="55"  alt="Verified by visa"></a>
+
 			</div>
-			<div class="cards">
-			We accept:
-			<img src="http://flawlesslashesproducts.co.uk/wp-content/plugins/woocommerce-gateway-sagepay-form/images/card-mastercard.png" alt="mastercard">
-			<img src="http://flawlesslashesproducts.co.uk/wp-content/plugins/woocommerce-gateway-sagepay-form/images/card-visa.png" alt="visa">
-			<img src="http://flawlesslashesproducts.co.uk/wp-content/plugins/woocommerce-gateway-sagepay-form/images/card-visa-debit.png" alt="visa debit"><a href="http://www.sagepay.co.uk/support/online-shoppers/about-sage-pay" onclick="javascript:window.open('http://www.sagepay.co.uk/support/online-shoppers/about-sage-pay','What is SagePay','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" title="What is SagePay?">
-			<img src="http://flawlesslashesproducts.co.uk/wp-content/plugins/woocommerce-gateway-sagepay-form/images/sagepaylogo.png" alt="Payments By SagePay"></a>
+			<div class="copyright">&copy; <?php echo date("Y"); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.
 			</div>
 		</div>
 	</footer>
