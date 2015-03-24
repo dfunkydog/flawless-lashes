@@ -9,7 +9,9 @@
  * @version     2.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
@@ -21,7 +23,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
 		 * @hooked woocommerce_breadcrumb - 20
 		 */
-		do_action('woocommerce_before_main_content');
+		do_action( 'woocommerce_before_main_content' );
 	?>
 
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>

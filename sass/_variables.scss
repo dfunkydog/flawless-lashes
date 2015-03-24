@@ -50,3 +50,18 @@ $input-border: #ccc;
 $input-disabled-background: $grayLighter;
 $input-height: $base-line-height + 10px; // base line-height + 8px vertical padding + 2px top/bottom border
 $horizontalComponentOffset: 180px !default;
+
+
+@mixin cf() {
+	&:before,
+	&:after {
+	    content: " "; /* 1 */
+	    display: table; /* 2 */
+	}
+
+	&:after {
+	    clear: both;
+	}
+
+	    *zoom: 1;
+}

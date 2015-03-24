@@ -57,23 +57,35 @@ nav.shop-nav{
 footer{
 	background: $grayDark;
 	width:100%;
-	.copyright{
-			clear:both;
-			align:right;
-			width:100%;
-			color:$white;
-			font-size:0.625em;
-			a{color:$grayLighter;}
+	.colophon{
+		@include cf();
+		width:100%;
+		max-width:960px;
+		margin:0 auto;
+		color:$white;
+		line-height:1;
+		font-size:0.625em;
+		padding-bottom:2em;
+		a{color:$grayLighter;}
+		& > div{
+			float:left;
+			margin-right: 2em;
+		}
+		.copyright{padding-top:4em;}
+		.cards{width:265px;padding-top:2.6em;}
+		.seal{width:108px;}
 	}
+
+
 }
 #footer{
 	background:$grayDark;
 	margin:0 auto;
-	padding:32px 16px;
+	padding:32px 16px 0 16px;
 	font-size:0.75em;
 	max-width:960px;
 	color:$grayLighter;
-
+	@include cf();
 	a{color:$grayLighter;}
 	ul{
 		width:90%;
