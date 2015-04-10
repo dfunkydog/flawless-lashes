@@ -28,6 +28,7 @@
 	add_theme_support('post-thumbnails');
 
 	register_nav_menus(array(
+		'top' => 'Fixed menu at the top of the page',
 		'primary' => 'Primary Navigation dropdown menu',
 		'footer-1' => 'Footer area 1 menu',
 		'footer-2' => 'Footer area 2 menu',

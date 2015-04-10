@@ -3,6 +3,17 @@ html{min-height:100%;}
 body{margin:0;}
 
 
+#global-menu{
+	@include pie-clearfix();
+.menu{
+	width:100%;
+	margin:0 auto;
+@media screen and (min-width:  961px) {
+	max-width:960px;
+	}
+
+}
+}
 .container{
 	width:90%;
 	margin:0 auto;
@@ -19,8 +30,6 @@ body{margin:0;}
 }
 #loginbasketgroup{
 	height:30px;
-	position:fixed;
-	width:90%;
 	max-width:960px;
 	.loginarea,.cart-contents, .telephone{
 		float:right;

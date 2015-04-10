@@ -1,27 +1,77 @@
 
 /***************MODULES******************/
+#global-menu{
+	background:$black;
+	ul.menu{
+			@include pie-clearfix();
+			&.hidden{
+				display:none;
+			}
+		li{
+			font-weight:400;
+			font-size: 0.875em; //  14/16
+			line-height:2;
+			&:first-child{
+				border-top: 1px solid $grayLight;
+			}
+			a{
+				color:$white;
+				display:block;
+				height:100%;
+				padding:0.5em 5%;
+				transition:all 200ms;
+				border-bottom: 1px solid $grayLight;
+				&:hover{
+					background-color:$grayLight;
+				}
 
-
-#secondarymenu{
-	margin-top:30px;
-	position: fixed;
-	background:$white;
-	width: 150px;
-	padding-left:10px;
-	z-index:100;
-	border:1px solid $grayLight;
-	border-top:none;
-	&.stashed {
-		top:-100%;
+			}
+		}
+	}
+	@media screen and (min-width:  961px) {
+		ul.menu{
+			border-right: 1px solid $grayLight;
+			li{
+				display:inline-block;
+				float:right;
+				font-weight:400;
+				font-size: 0.875em; //  14/16
+				line-height:2;
+				&:first-child{
+					border-top: none;
+				}
+				a{
+					color:$white;
+					display:block;
+					height:100%;
+					padding:0 2em;
+					border-bottom: none;
+					border-left: 1px solid $grayLight;
+					border-right: 1px solid $blacker;
+					transition:all 200ms;
+					&:hover{
+						border-right: 1px solid $grayLight;
+						background-color:$grayLight;
+					}
+				}
+			}
+		}
 	}
 }
+
+.menu-icon{
+	padding-left:5%;
+	&:hover{cursor: pointer;}
+	@media screen and (min-width:  961px){
+		display:none;
+	}
+}
+
+
 #loginbasketgroup{
 	font-size:0.8714em;
 	z-index:101;//always higer than secondary menu
 	background:$white;
-	.menu-icon{
-		padding-right:10px;
-	}
 	a.telephone{
 		display:none;
 		@media screen and (min-width: 480px) {

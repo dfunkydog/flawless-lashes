@@ -17,12 +17,30 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$('.menu-icon').click(function() {
-		$('#secondarymenu').toggleClass('stashed');
-	});
-
+	if( viewport().width <= 960 ){
+		$("#global-menu ul.menu").addClass("hidden");
+	}
+	$('.menu-icon').on("click",function(e){
+		$("#global-menu ul.menu").toggleClass("hidden");
+	})
 	var highCol = Math.max($(".productdetail").height());
 	$(".productdetail").height(highCol).addClass("equalheight");
 
+
+	function viewport() {
+	    var e = window, a = 'inner';
+	    if (!('innerWidth' in window )) {
+	        a = 'client';
+	        e = document.documentElement || document.body;
+	    }
+	    return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
+	}
+	$(window).on("debouncedresize", function(e){
+		if( viewport().width > 960 ) {
+			if( $("#global-menu ul.menu").hasClass("hidden") ) {
+				$("#global-menu ul.menu").removeClass("hidden");
+			}
+		}
+	});
 
 });
