@@ -264,6 +264,31 @@ p{
 }
 
 
+.page dl{
+	@include trailer();
+	dt{
+		padding-left:2em;
+		@include padding-leader(0.5);
+		font-weight:700;
+		&:after{
+			content:":";
+		}
+		&:nth-child(4n+1), &:nth-child(4n+1) + dd{
+			background-color:$grayLighter;
+		}
+	}
+	dd{
+		margin:0;
+		padding-left:4em;
+		@include padding-trailer(0.5);
+		a{border-bottom:1px dotted $black;}
+	}
+	a:hover{
+		color:$blue;
+		border-bottom:1px dotted $blue;
+	}
+}
+
 /******************SHOP STYLES******************/
 
 #wooshop{
