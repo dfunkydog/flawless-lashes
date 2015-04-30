@@ -13,4 +13,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <h2 itemprop="name" class="product_title entry-title"><?php the_title(); ?></h2>
-

@@ -79,7 +79,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 		 *
 		 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
 		 */
-		do_action( 'woocommerce_after_main_content');
+		do_action( 'woocommerce_after_main_content' );
 	?>
 
 	<?php
