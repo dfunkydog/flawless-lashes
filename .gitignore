@@ -58,3 +58,5 @@ css/
 *.css
 .sass-cache/
 *.scssc
+
+list.txt
