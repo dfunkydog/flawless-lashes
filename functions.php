@@ -175,7 +175,7 @@ woocommerce customisations
 
 =========================*/
 
-// Change the breadcrumb delimeter from '/' to '»'
+// Change the breadcrumb delimiter from '/' to '»'
 add_filter( 'woocommerce_breadcrumb_defaults', 'fl_breadcrumb_delimiter' );
 function fl_breadcrumb_delimiter( $defaults ) {
 $defaults['delimiter'] = ' &raquo; ';
@@ -198,18 +198,9 @@ return $fragments;
 }
 
 
-//add_filter( 'woocommerce_product_tabs', 'fl_woo_remove_reviews_tab', 98);
-function fl_woo_remove_reviews_tab($tabs) {
-
- unset($tabs['reviews']);
-
- return $tabs;
-}
-
-
-/*-----------------------
+/*-------------------------
 limit related product to 3
------------------------*/
+-------------------------*/
 
 function woo_related_products_limit() {
   global $product;
@@ -230,9 +221,22 @@ add_filter( 'woocommerce_related_products_args', 'woo_related_products_limit' );
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',30);
 add_Action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',15);
 
-
+/*-----------------------------
 // Display 18 products per page
+------------------------------*/
+
 add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 18;' ), 20 );
+
+/*-----------------------------------
+Change number of upsells output
+-----------------------------------*/
+
+add_filter('woocommerce_cross_sells_total', 'flawless_cross_sells_total');
+
+function flawless_cross_sells_total( ){
+	$posts_per_page = 3;
+	return $posts_per_page ;
+}
 
 
 /*-----------------------------------
@@ -280,18 +284,18 @@ function wooshare(){
 }
 
 
-/*===============================================================
+/*============================
 
 Customize wordpress gallery
 
-===============================================================*/
+=============================*/
 
 remove_shortcode('gallery', 'gallery_shortcode');
 add_shortcode( 'gallery','fl_gallery' );
 
 
 
-		/**
+/**
  * The Gallery shortcode.
  *
  * This implements the functionality of the Gallery Shortcode for displaying
@@ -414,7 +418,7 @@ function fl_gallery($attr) {
 		$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
 	} else {
 		$output = "<div id='$selector' class='fl-gallery'>\n";
-		$output .="<div class='cycle-slideshow' data-cycle-swipe='true' data-cycle-timeout='7000' data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
+		$output .="<div class='cycle-slideshow' data-cycle-swipe='true' data-cycle-log='false' data-cycle-timeout='7000' data-cycle-fx='scrollHorz' data-cycle-pause-on-hover='true' data-cycle-slides='> div' data-cycle-prev='#prev' data-cycle-next='#next'>\n";
 	}
 
 
@@ -451,7 +455,12 @@ function fl_gallery($attr) {
 		}
 	} else {
 		foreach ($attachments as $id => $attachment) {
-			$image_output = wp_get_attachment_image( $id, $size, false );
+			if ( ! empty( $link ) && 'file' === $link )
+				$image_output = wp_get_attachment_link( $id, $size, false, false );
+			elseif ( ! empty( $link ) && 'none' === $link )
+				$image_output = wp_get_attachment_image( $id, $size, false );
+			else
+				$image_output = wp_get_attachment_link( $id, $size, true, false );
 			$output .="<div>";
 			$output .= $image_output;
 			if ( $captiontag && trim($attachment->post_excerpt) ) {
@@ -486,9 +495,11 @@ function fl_gallery($attr) {
 		}
 
 	return $output;
-}// END OF CUSTOM GALLERY
-/*****ADD STYLE BUTTON IN WORDPRESS GALLERY*/
+}
 
+/*-------------------------------------
+ADD STYLE BUTTON IN WORDPRESS GALLERY
+-------------------------------------*/
 
 add_action('print_media_templates', function(){
 
@@ -531,6 +542,155 @@ add_action('print_media_templates', function(){
   <?php
 
 });
+
+// END OF CUSTOM GALLERY CODE
+
+
+/*-------------------------------------
+ADD COST TO PRODUCT FIELD
+-------------------------------------*/
+
+// Display Fields
+add_action( 'woocommerce_product_options_pricing', 'woo_add_custom_general_fields' );
+
+// Save Fields
+add_action( 'woocommerce_process_product_meta', 'woo_add_custom_general_fields_save' );
+
+function woo_add_custom_general_fields() {
+
+  global $woocommerce, $post;
+
+  echo '<div class="options_group">';
+
+	// Number Field
+	woocommerce_wp_text_input(
+		array(
+			'id'                => '_cost_price',
+			'label'             => __( 'Cost Price', 'woocommerce' ),
+			'placeholder'       => '',
+			'description'       => __( 'Enter the item cost price here.', 'woocommerce' ),
+			'type'              => 'number',
+			'custom_attributes' => array(
+					'step' 	=> 'any',
+					'min'	=> '0'
+				)
+		)
+	);
+
+
+
+
+  echo '</div>';
+
+}
+
+function woo_add_custom_general_fields_save( $post_id ){
+	$woocommerce_cost_price = $_POST['_cost_price'];
+	if( !empty( $woocommerce_cost_price ) )
+		update_post_meta( $post_id, '_cost_price', esc_attr( $woocommerce_cost_price ) );
+}
+
+
+/*-------------------------------------
+ADD COST TO PRODUCT VARIATION FIELD
+-------------------------------------*/
+/* ADD CUSTOM FIELDS TO VARIATION PRODUCT */
+
+//Display Fields
+add_action( 'woocommerce_product_after_variable_attributes', 'variable_fields', 10, 3 );
+//JS to add fields for new variations
+add_action( 'woocommerce_product_after_variable_attributes_js', 'variable_fields_js' );
+//Save variation fields
+add_action( 'woocommerce_process_product_meta_variable', 'save_variable_fields', 10, 1 );
+add_action( 'woocommerce_process_product_meta_variable-subscription' , 'save_variable_fields' , 10 , 1 ) ;
+
+/**
+ * Create new fields for variations
+ *
+*/
+function variable_fields( $loop, $variation_data, $variation ) {
+?>
+
+  <tr>
+    <td>
+      <?php
+      // Textarea
+      woocommerce_wp_text_input(
+        array(
+          'id'          => '_cost_price['.$loop.']',
+          'label'       => __( 'Cost Price', 'woocommerce' ),
+          'placeholder' => '',
+          'description' => __( 'Enter the cost price here.', 'woocommerce' ),
+          'value'       => get_post_meta($variation->ID,'_cost_price',true),
+          'type'              => 'number',
+			'custom_attributes' => array(
+					'step' 	=> 'any',
+					'min'	=> '0'
+				)
+        )
+      );
+      ?>
+    </td>
+  </tr>
+
+<?php
+}
+
+/**
+ * Create new fields for new variations
+ *
+*/
+function variable_fields_js() {
+?>
+
+  <tr>
+    <td>
+      <?php
+      // Textarea
+      woocommerce_wp_text_input(
+        array(
+          'id'          => '_cost_price[ + loop + ]',
+          'label'       => __( 'Cost Price', 'woocommerce' ),
+          'placeholder' => '',
+          'description' => __( 'Enter the cost price here.', 'woocommerce' ),
+          'value'       => get_post_meta($variation->ID,'_cost_price',true),
+          'type'              => 'number',
+			'custom_attributes' => array(
+					'step' 	=> 'any',
+					'min'	=> '0'
+				)
+        )
+      );
+      ?>
+    </td>
+  </tr>
+
+<?php
+}
+
+/**
+ * Save new fields for variations
+ *
+*/
+function save_variable_fields( $post_id ) {
+  if (isset( $_POST['variable_sku'] ) ) :
+
+    $variable_sku          = $_POST['variable_sku'];
+    $variable_post_id      = $_POST['variable_post_id'];
+
+    // Textarea
+    $_cost_price = $_POST['_cost_price'];
+    for ( $i = 0; $i < sizeof( $variable_sku ); $i++ ) :
+      $variation_id = (int) $variable_post_id[$i];
+      if ( isset( $_cost_price[$i] ) ) {
+        update_post_meta( $variation_id, '_cost_price', stripslashes( $_cost_price[$i] ) );
+      }
+    endfor;
+
+
+  endif;
+}
+
 
 /*======================================
 
@@ -589,8 +749,8 @@ function order_email_workaround ($order_id) {
 }
 
 //remove built in styles each style one by one
-add_filter( 'woocommerce_enqueue_styles', 'jk_dequeue_styles' );
-function jk_dequeue_styles( $enqueue_styles ) {
+add_filter( 'woocommerce_enqueue_styles', 'fl_dequeue_styles' );
+function fl_dequeue_styles( $enqueue_styles ) {
 unset( $enqueue_styles['woocommerce-smallscreen'] ); // Remove the smallscreen optimisation
 return $enqueue_styles;
 }

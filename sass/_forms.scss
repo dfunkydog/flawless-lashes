@@ -72,7 +72,6 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: inline-block;
-  height: $base-line-height;
   padding: 4px 6px;
   margin-bottom: $base-line-height / 2;;
   font-size: $base-font-size;
@@ -654,4 +653,13 @@ legend + .control-group {
   .form-actions {
     padding-left: $horizontalComponentOffset;
   }
+}
+
+/*----------------------------
+checkout newletter checkbox
+----------------------------*/
+
+input#ss_wc_mailchimp_opt_in[type="checkbox"] {
+  float: none;
+  margin-left: -20px;
 }
