@@ -1,11 +1,17 @@
 <div id="global-menu">
-<svg height="30" width="30" class="menu-icon">
-			<switch><g transform="translate(-225.58,-473.9)">
-							<path fill="#666" d="m225.6 486.9 26 0 0 4-26 0zM225.6 494.9l26 0 0 4-26 0zM225.6 478.9l26 0 0 4-26 0z"/>
-						</g>
-						<foreignObject><img alt="" width="30px" height="30px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABPSURBVEiJ7dQxDgAgCANAcDF+lG/xTcKCk09QktpuTJdAilaVdGS0qIRfRs0sRGTehjJzuXuc+b9V992YDwQeZo/xYfYYH2aP8WH2mPC1bBu+JCEZiQ6WAAAAAElFTkSuQmCC" /></foreignObject></switch>
-		</svg>
-		<?php wp_nav_menu( array( 'theme_location' => 'top', 'container' => false ) ); ?>
+	<div class="menu-toggle">
+		<svg height="30" width="30" viewBox="0 0 30 30" class="menu-icon">
+      <switch>
+        <g id="burger">
+		    <path class="ham border-box" d="M0 0L0 27 29 27 29 0 0 0zM1 1L28 1 28 26 1 26 1 1z"/>
+		    <path class="ham top" d="m4 5 21 0 0 3-21 0z"/>
+		    <path class="ham middle" d="m4 12 21 0 0 3-21 0z"/>
+		    <path class="ham bottom" d="m4 19 21 0 0 3-21 0z"/>
+		  </g>
+            <foreignObject><img alt="" width="30px" height="30px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABPSURBVEiJ7dQxDgAgCANAcDF+lG/xTcKCk09QktpuTJdAilaVdGS0qIRfRs0sRGTehjJzuXuc+b9V992YDwQeZo/xYfYYH2aP8WH2mPC1bBu+JCEZiQ6WAAAAAElFTkSuQmCC" /></foreignObject></switch>
+    </svg>
+	</div>
+		<?php wp_nav_menu( array( 'theme_location' => 'top', 'container' => false, 'menu_class'=> 'menu hidden', ) ); ?>
 
 </div>
 <div class="container">
@@ -38,20 +44,20 @@
 </div>
 <nav class="shop-nav">
 	<ul><?php
-$args = array(
-    'number'     => $number,
-    'orderby'    => $orderby,
-    'order'      => $order,
-    'hide_empty' => $hide_empty,
-    'include'    => $ids,
-     'parent'    => 0
-);
-$product_categories = get_terms( 'product_cat', $args );
-foreach( $product_categories as $cat ) {
-echo '<li><a href="'. get_site_url().'/?product_cat='. $cat->slug .'">'. $cat->name . '</a></li>';
-}
-?>
-
-</ul>
+		$args = array(
+		      'number' => 'null',
+		      'orderby' => 'name',
+		      'order' => 'ASC',
+		      'columns' => '4',
+		      'hide_empty' => true,
+		      'parent' => '0',
+		      'ids' => ''
+		 );
+		$product_categories = get_terms( 'product_cat', $args);
+		foreach( $product_categories as $cat ) {
+			echo '<li><a href="'. get_site_url().'/?product_cat='. $cat->slug .'">'. $cat->name . '</a></li>';
+			}
+		?>
+	</ul>
 </nav>
 <div id="main">

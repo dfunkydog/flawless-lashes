@@ -27,6 +27,7 @@ body{margin:0;}
 	background:transparent url(img/60opacity.png);
 	margin:0 auto;
 	@include pie-clearfix;
+	@include trailer();
 }
 #loginbasketgroup{
 	height:30px;
@@ -35,18 +36,6 @@ body{margin:0;}
 		float:right;
 		margin-left: 20px;
 	}
-}
-#brandingsearch{
-	padding-top:32px;
-	width:100%;
-}
-#search-container{
-	width:100%;
-	@media screen and (min-width: 761px) {
-	    width:53%;
-	    float:right;
-	}
-
 }
 
 nav.shop-nav{
@@ -92,15 +81,11 @@ footer{
 
 }
 #footer{
-	background:$grayDark;
-	margin:0 auto;
+	margin:32px auto 0 auto;
 	padding:32px 16px 0 16px;
-	font-size:0.75em;
 	max-width:960px;
-	color:$grayLighter;
 	@include cf();
-	a{color:$grayLighter;}
-	ul{
+	ul:not(.children){
 		width:90%;
 		margin:auto;
 		margin-bottom:2em;

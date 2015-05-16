@@ -17,10 +17,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	if( viewport().width <= 960 ){
-		$("#global-menu ul.menu").addClass("hidden");
-	}
 	$('.menu-icon').on("click",function(e){
+		$(this).parent().toggleClass('active');
 		$("#global-menu ul.menu").toggleClass("hidden");
 	})
 	var highCol = Math.max($(".productdetail").height());

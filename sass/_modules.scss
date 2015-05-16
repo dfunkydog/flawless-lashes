@@ -30,6 +30,7 @@
 	}
 	@media screen and (min-width:  961px) {
 		ul.menu{
+			&.hidden{display:block;}
 			border-right: 1px solid $grayLight;
 			li{
 				display:inline-block;
@@ -59,11 +60,37 @@
 	}
 }
 
-.menu-icon{
+.menu-toggle{
 	padding-left:5%;
+	line-height:1;
+	padding-top:5px;
+	&.active {
+		.ham {
+			transition: all 250ms ease-out;
+			fill: #ccc;}
+		.top{
+			transform-origin: 6px 11px;
+			transform:rotate(45deg);
+		}
+		.middle{
+			transform-origin: 16px 17px;
+			transform:scale(0.1, 0.1);
+		}
+		.bottom {
+			transform-origin: 7px 17px;
+			transform:rotate(-45deg);
+		}
+	}
+}
+.menu-icon{
 	&:hover{cursor: pointer;}
 	@media screen and (min-width:  961px){
 		display:none;
+	}
+	.ham, .ham.border-box{
+	transition: all 250ms ease-out;
+		fill:#999;
+		transform:rotate(0deg);
 	}
 }
 
@@ -90,9 +117,9 @@ nav.shop-nav{
 }
 #search-container .woocommerce-product-search{
 	border:1px solid darken($grayLighter, 10%);
-	@include trailer();
 	border-radius: 3px;
 	overflow:hidden;
+	margin-bottom:0;
 	input{
 		padding: 4px;
 		vertical-align: top;
@@ -120,6 +147,29 @@ nav.shop-nav{
 		}
 	}
 }
+
+#brandingsearch{
+	padding-top:32px;
+	width:100%;
+}
+.blogname{
+	@media screen and (min-width: 761px) {
+		float:left;
+	}
+}
+#search-container{
+	width:100%;
+	@include leader(0.5);
+	@include trailer(0.5);
+	@media screen and (min-width: 761px) {
+	    width:50%;
+	    float:right;
+	    margin-top: 0;
+	    margin-bottom: 0;
+	}
+
+}
+
 
 input#s{
 		width:75%;
@@ -169,81 +219,7 @@ table.shop_attributes{
 		text-align: left;
 	}
 }
-//help
-/********** pricelist for beautique & studio ***/
 
-
-.productdetail{
-	border-radius: 5px;
-	border:1px solid $gray;
-	a{color:$white;}
-	a:hover{color:$gold;}
-	h3{
-		font-size:2.1em;
-		margin-bottom: 0;
-		padding:0.5em;
-	}
-	p{
-		margin:0;
-		font-style: italic;
-	}
-	h4.price{
-		@include inline-block;
-		float:right;
-		text-align:right;
-		background:$gold;
-		margin-bottom:0;
-		padding:0.5em;
-		border-bottom-right-radius: 5px;
-		border-top-left-radius: 5px;
-		font-weight:700;
-		font-size:1.6em;
-		&:hover{cursor: pointer;}
-	}
-		form.paypal-btn{
-		@include inline-block;
-		float:right;
-		text-align:right;
-		background:$gold;
-		margin-bottom:0;
-		padding:0.1em;
-		border-bottom-right-radius: 5px;
-		border-top-left-radius: 5px;
-		font-weight:700;
-		font-size:1.6em;
-		input{
-			color:$white;
-			font-family:$header-family;
-			font-weight: 700;
-			background:none;
-			border:none;
-			&:hover{cursor:pointer;}
-			&:active{border:none;}
-		}
-	}
-	&.equalheight {
-		h4.price,form.paypal-btn{
-			position:absolute;
-			bottom:0;
-			right:0;
-		}
-	}
-}
-
-.vcard{
-	.org .tel{
-		font-size:1.25em;
-		font-weight:700;
-		text-transform: uppercase;
-		font-family:$header-family;
-	}
-	.adr {
-		margin-top: 1.625em;
-	}
-	p{
-		margin-top: 0;
-	}
-}
 
 
 @media screen and (min-width: 761px) {
@@ -335,7 +311,7 @@ p{
 			&:nth-child(2n){margin-right:0;}
 			&.first{clear:none;}
 			a.button{
-				width:87%;
+				width:100%;
 				font-size: 0.871em;
 				text-align:center;
 			}
@@ -351,6 +327,10 @@ p{
 	}
 	.product{
 		top:24px;
+		.woocommerce-tabs ul.tabs li a{
+			font-weight:400;
+		}
+		p.stock{ color: $gold; }
 	}
 	.entry-summary {
 		h2{
@@ -360,8 +340,23 @@ p{
 			margin-top:0;
 		}
 	}
+	.price {
+		color: $gold;
+		ins{
+			font-weight:400;
+		}
+		del{
+			color: $black;
+			font-size:0.8em;
+			display:inline;
+			margin-right:0.5em;
+		}
+	}
 	#tab-description h2 {
 		display:none;
+	}
+	#reviews #comments img.avatar {
+		width:38px;
 	}
 	input.minus{
 		top:15px;
@@ -379,16 +374,64 @@ p{
 		max-width:100%;
 	}
 
-	span.onsale{z-index:5;}
+	span.onsale{
+		z-index:5;
+		padding:0;
+		background-color: $gold;
+	}
 
-	.cart-collaterals .cart_totals{
-		table{
-			width:100%;
-			th{
-				text-align:left;
-				padding-right:2em;
+	.cart-collaterals {
+		.products li {
+			width:45%;
+		}
+		.star-rating, .price del { display: none; }
+		.cart_totals{
+			table{
+				width:100%;
+				th{
+					text-align:left;
+					padding-right:2em;
+				}
 			}
 		}
+	}
+
+	td dl{
+		font-size:0.875em;
+		margin:0;
+		line-height:1;
+		 dt {
+			font-weight: 300;
+			}
+		dd {
+			margin-left:0.5em;
+			p{
+				margin-top:0;
+			}
+		}
+	}
+	a.remove{
+		font-weight:400;
+		line-height:0.9;
+	}
+
+	#content input.button.alt, #respond input#submit.alt, a.button.alt,
+	button.button.alt, input.button.alt, .woocommerce-page #content input.button.alt,
+	.woocommerce-page #respond input#submit.alt, .woocommerce-page a.button.alt,
+	.woocommerce-page button.button.alt, .woocommerce-page input.button.alt {
+		font-weight:400;
+	    background: linear-gradient($gold 0px, darken($gold,5%) 100%);
+	    border-color: #76456C;
+	    color: #FFFFFF;
+	    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+	    &:hover{
+	    	background: linear-gradient(saturate($gold,10%) 0px, saturate(darken($gold,5%),10%) 100%);
+	    border-color: #76456C;
+	    }
+	}
+
+	.thumbnails .attachment-shop_thumbnail{
+		width:90px;
 	}
 	@media screen and (max-width: 768px) {
 		table.cart td.actions input {
@@ -406,22 +449,24 @@ p{
 				width:100%;
 			}
 		}
+		.cart-collaterals {
+			.cross-sells{
+				display:none;
+			}
+		}
 	}
 
 	@media screen and (min-width: 480px) {
-			margin:0 auto;
-	   ul.products{
+		margin:0 auto;
+		ul.products{
 			font-size:1em;
 			li{
-
 				width:30%;
 				margin-right:5%;
 				&:nth-child(2n){margin-right:5%;float:left;}
 				&:nth-child(3n){margin-right:0;}
                 &.product{clear:none;&:nth-child(3n+1){clear:left;}}
-
 				a.button{
-					width:93%;
 					font-size: 0.871em;
 					padding:1em;
 				}
@@ -434,9 +479,8 @@ p{
 
 /*---------------------------------
 
-    styles for checkout page
-	separate because there's no
-	#wooshop wrapper
+    styles where #wooshop not
+    available or needed
 
 --------------------------------*/
 .woocommerce table.shop_table th {
@@ -447,6 +491,12 @@ p{
 	table.shop_table {
 		border-radius:5px;
 		border-spacing:0;
+		td {
+			@media screen and (max-width: 480px) {
+			    padding:6px 0;
+			}
+
+		}
 		tbody th, tfoot td, tfoot th{
 			font-weight:500;
 		}
@@ -464,7 +514,48 @@ p{
 		}
 	}
 }
+.woocommerce {
+	.variations label, div.product form.cart .variations label,
+	.woocommerce-page #content div.product form.cart .variations label,
+	.woocommerce-page div.product form.cart .variations label, #content .quantity input.qty,
+	.quantity input.qty, .woocommerce-page #content .quantity input.qty, .quantity input.qty,
+	.button, .woocommerce-tabs ul.tabs a, input.button, a.button, #respond input#submit{
+		font-weight:400;
+	}
+	.woocommerce-message, .woocommerce-info {
+		border-top: 3px solid $gold;
+	}
+	.woocommerce-message:before, .woocommerce-page .woocommerce-message:before, .woocommerce-info:before, .woocommerce-page .woocommerce-info:before{
+		color:$gold;
+	}
+}
 
+
+
+#order_review{
+td dl{
+		font-size:0.875em;
+		margin:0;
+		line-height:1;
+		 dt {
+			font-weight: 300;
+			}
+		dd {
+			margin-left:0.5em;
+			p{
+				margin-top:0;
+			}
+		}
+	}
+}
+
+#place_order{
+	font-weight:400;
+}
+
+.woocommerce-checkout #payment div.payment_box {
+ 	width:100%;
+ }
 
 @media screen and (max-width: 768px) {
 	.woocommerce, .woocommerce-page {
@@ -474,57 +565,13 @@ p{
 		}
 	}
 }
-/****************Overrides************/
-#wooshop{
-	 .woocommerce-message, .woocommerce-message {
-	    border-top: 3px solid $gold;
-		}
 
 
-
-	.woocommerce-message:before, .woocommerce-page .woocommerce-message:before{
-		background-color:$gold;
-	}
-	td.product-name dl.variation{
-		font-size:0.875em;
-		 dt {
-			font-weight: 300;
-			}
-		dd {
-			margin-left:1em;
-			p{
-				margin-top:0;
-			}
-		}
-	}
-
-	#content input.button.alt, #respond input#submit.alt, a.button.alt,
-	button.button.alt, input.button.alt, .woocommerce-page #content input.button.alt,
-	.woocommerce-page #respond input#submit.alt, .woocommerce-page a.button.alt,
-	.woocommerce-page button.button.alt, .woocommerce-page input.button.alt {
-		font-weight:400;
-	    background: linear-gradient($gold 0px, darken($gold,5%) 100%);
-	    border-color: #76456C;
-	    color: #FFFFFF;
-	    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
-	    &:hover{
-	    	background: linear-gradient(saturate($gold,10%) 0px, saturate(darken($gold,5%),10%) 100%);
-	    border-color: #76456C;
-	    }
-	}
-	.variations label, div.product form.cart .variations label,
-	.woocommerce-page #content div.product form.cart .variations label,
-	.woocommerce-page div.product form.cart .variations label, #content .quantity input.qty,
-	.quantity input.qty, .woocommerce-page #content .quantity input.qty, .quantity input.qty,
-	.button, .woocommerce-tabs ul.tabs a{
-		font-weight:400;
-	}
-	.thumbnails .attachment-shop_thumbnail{
-		width:90px;
-	}
-
-}
-
+/*
+* Home page slides. FYI the plugin script only loads
+* on is_frontpage. see functions.php
+*
+*/
 .cycle-slideshow{
 	border-top:8px solid $black;
 }
@@ -568,14 +615,14 @@ p{
 		outline:0;
 		&#next{
 			float:right;
-			background:url(img/next.png) no-repeat;
+			background:url(css/img/next.png) no-repeat;
 			background-size:contain;
 			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/next.png', sizingMethod='scale')";
 
 		}
 		&#prev{
 			float:left;
-			background:url(img/previous.png) no-repeat;
+			background:url(css/img/previous.png) no-repeat;
 			background-size:contain;
 			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/previous.png', sizingMethod='scale')";
 		}
@@ -623,3 +670,16 @@ p{
 	line-height:1.625;
 }
 
+#footer{
+	background:$grayDark;
+	font-size:0.875em;
+	color:$grayLighter;
+	a{color:$grayLighter;}
+	div.menu>ul>li, ul.menu>li{
+		padding:0.5em 0;
+		border-bottom:1px dotted $grayLight;
+		&:last-child{
+			border:none;
+		}
+	}
+}

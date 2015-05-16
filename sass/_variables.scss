@@ -3,6 +3,7 @@
 $base-font-size        :16px;
 $base-line-height      :26px;
 @include establish-baseline;
+@include border-box-sizing();
 
 $header-family: montserrat;
 $body-family: ubuntu;

@@ -228,16 +228,15 @@ add_Action('woocommerce_single_product_summary', 'woocommerce_template_single_ad
 add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 18;' ), 20 );
 
 /*-----------------------------------
-Change number of upsells output
+Change number of cross-sells output
 -----------------------------------*/
 
 add_filter('woocommerce_cross_sells_total', 'flawless_cross_sells_total');
 
 function flawless_cross_sells_total( ){
-	$posts_per_page = 3;
+	$posts_per_page = 2;
 	return $posts_per_page ;
 }
-
 
 /*-----------------------------------
 add share buttons under add to cart
@@ -245,6 +244,7 @@ add share buttons under add to cart
 
 add_action('woocommerce_share','wooshare');
 function wooshare(){
+	global $post;
 	echo'<div id="fl-woo-share">
 	<div class="fb-like" data-href="'.get_permalink().'" data-layout="button" data-send="false" data-width="100"></div>
 	<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
