@@ -4,6 +4,7 @@
 	background:$black;
 	ul.menu{
 			@include pie-clearfix();
+			margin:0;
 			&.hidden{
 				display:none;
 			}
@@ -11,9 +12,6 @@
 			font-weight:400;
 			font-size: 0.875em; //  14/16
 			line-height:2;
-			&:first-child{
-				border-top: 1px solid $grayLight;
-			}
 			a{
 				color:$white;
 				display:block;
@@ -26,15 +24,23 @@
 				}
 
 			}
+			ul li a{
+				padding-left:3.918367347em;
+			}
 		}
+		&>li:first-child{
+				border-top: 1px solid $grayLight;
+			}
 	}
 	@media screen and (min-width:  961px) {
 		ul.menu{
+			float:right;
+			display:table;
 			&.hidden{display:block;}
 			border-right: 1px solid $grayLight;
 			li{
-				display:inline-block;
-				float:right;
+				display:table-cell;
+				position:relative;
 				font-weight:400;
 				font-size: 0.875em; //  14/16
 				line-height:2;
@@ -55,6 +61,27 @@
 						background-color:$grayLight;
 					}
 				}
+
+				ul{
+					background-color:$gray;
+					display:table;
+						min-width:100%;
+						position:absolute;
+						left:0;
+						z-index:102;
+					li{
+					background-color:$black;
+						a{
+							min-width:100%;
+							padding:0 2em;
+						}
+					}
+				}
+				// This is to prevent rightmost submenu flowing outside its parent right
+				&:last-child ul{
+							right:0;
+							left:auto;
+						}
 			}
 		}
 	}

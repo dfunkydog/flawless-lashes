@@ -5,11 +5,12 @@ body{margin:0;}
 
 #global-menu{
 	@include pie-clearfix();
-.menu{
+.global-menu_inner{
 	width:100%;
 	margin:0 auto;
 @media screen and (min-width:  961px) {
 	max-width:960px;
+	margin-top:-5px;
 	}
 
 }

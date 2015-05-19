@@ -11,7 +11,7 @@
             <foreignObject><img alt="" width="30px" height="30px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABPSURBVEiJ7dQxDgAgCANAcDF+lG/xTcKCk09QktpuTJdAilaVdGS0qIRfRs0sRGTehjJzuXuc+b9V992YDwQeZo/xYfYYH2aP8WH2mPC1bBu+JCEZiQ6WAAAAAElFTkSuQmCC" /></foreignObject></switch>
     </svg>
 	</div>
-		<?php wp_nav_menu( array( 'theme_location' => 'top', 'container' => false, 'menu_class'=> 'menu hidden', ) ); ?>
+		<?php wp_nav_menu( array( 'theme_location' => 'top', 'container' => 'div', 'container_class' => 'global-menu_inner', 'menu_class'=> 'menu hidden', ) ); ?>
 
 </div>
 <div class="container">
