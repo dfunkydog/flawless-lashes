@@ -247,8 +247,6 @@ table.shop_attributes{
 	}
 }
 
-
-
 @media screen and (min-width: 761px) {
     .pullquote{
 	width:40%;
@@ -358,6 +356,12 @@ p{
 			font-weight:400;
 		}
 		p.stock{ color: $gold; }
+		//for flex enabled browsers
+		&.equalheight{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
 	}
 	.entry-summary {
 		h2{

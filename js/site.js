@@ -35,13 +35,25 @@ jQuery(document).ready(function($) {
 		$('#global-menu ul.menu').toggleClass('hidden');
 	});
 
-	var highCol = Math.max($('.productdetail').height());
-	$('.productdetail').height(highCol).addClass('equalheight');
+	function equalHeightCols (column){
+		// reset any fixed heights
+		var target = $(column);
+		target.css('height','auto');
+		var highCol = Math.max(target.height());
+		target.height(highCol).addClass('equalheight');
+	}
+
+	$(window).bind('load', function() {
+	   equalHeightCols('ul.products .product');
+	});
+
 
 	/* when resized if viewport is larger than 960 & menu is hidden
 	 	please unhide the menu but only show top level items
 	 */
 	$(window).on('debouncedresize', function(){
+		//Let's run equal height columns again
+		equalHeightCols('ul.products .product');
 		if( viewport().width > 960 ) {
 			if( $('#global-menu ul.menu').hasClass('hidden') ) {
 				$('#global-menu ul.menu').removeClass('hidden');
