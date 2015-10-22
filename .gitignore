@@ -54,8 +54,7 @@ psd
 build/buildinfo.properties
 build/config/buildinfo.properties
 
-css/
-*.css
+
 .sass-cache/
 *.scssc
 
