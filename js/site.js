@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
 	 	please unhide the menu but only show top level items
 	 */
 	$(window).on('debouncedresize', function(){
-		//Let's run equal height columns again
+
 		equalHeightCols('ul.products .product');
 		if( viewport().width > 960 ) {
 			if( $('#global-menu ul.menu').hasClass('hidden') ) {
@@ -66,3 +66,4 @@ jQuery(document).ready(function($) {
 		}
 	});
 });
+
