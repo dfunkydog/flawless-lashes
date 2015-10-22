@@ -1,0 +1,58 @@
+/*
+Theme Name: Flawless by Loreta theme
+Theme URI: http://flatsome.uxthemes.com/
+Description: This is a child theme for Flatsome
+Author: MIchael D
+Author URI: http: //www.uxthemes.com/
+Template: flatsome
+Version: 1.0
+*/
+
+/*************** ADD CUSTOM CSS HERE.   ***************/
+
+#top-bar li>a{color:#333;}
+
+.wp-caption img[class*='wp-image-']{
+margin:0;
+width:100%;
+max-width:100%;
+}
+
+h1, h2, h3, h3, h5, h6{
+font-weight:normal;
+}
+.ux-slider-wrapper h5 {
+    font-weight:400;
+    text-transform:capitalize;
+}
+
+.ux-slider-wrapper .columns { padding:0; }
+
+.ux-slider-wrapper .wp-caption{
+    margin-bottom:0;
+    border:none;
+    width:100% !important;
+}
+.ux-slider-wrapper .wp-caption-text{
+position:absolute;
+bottom:0;
+background:rgba(0,0,0,0.2);
+color:#fff;
+font-size:0.75em;
+width:100%;
+}
+
+
+.alt-button{
+    color:#777 !Important;
+    background-color:#E7E7E9 !Important;
+}
+.add-to-cart-button .button.alt-button:hover{
+    background-color:#aaa !Important;
+}
+
+@media only screen and (max-width: 48em) {
+/*************** ADD MOBILE ONLY CSS HERE  ***************/
+
+
+}
